@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Asterio "Jboy" Badang · Mixtape Profile</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --tape:#17151a;
+    --tape-2:#211f26;
+    --cream:#f4efe2;
+    --card:#faf6ea;
+    --brass:#c08a3e;
+    --teal:#3c7a74;
+    --ink:#211f24;
+    --soft:#7a7266;
+    --line:#ddd3bd;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body{
+    font-family:'Manrope', sans-serif;
+    background:var(--tape);
+    color:var(--cream);
+    height:100vh; overflow:hidden;
+    background-image: radial-gradient(rgba(244,239,226,0.03) 1px, transparent 1px);
+    background-size:20px 20px;
+  }
+  ::-webkit-scrollbar{ width:9px; }
+  ::-webkit-scrollbar-track{ background:transparent; }
+  ::-webkit-scrollbar-thumb{ background:var(--brass); border-radius:0; }
+  .display{ font-family:'Bebas Neue', sans-serif; letter-spacing:.03em; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes reelSpin{ from{ transform:rotate(0deg);} to{ transform:rotate(360deg);} }
+  @keyframes needleBob{ 0%,100%{ transform:rotate(-3deg);} 50%{ transform:rotate(3deg);} }
+  @keyframes waveMove{ 0%{ background-position:0 0;} 100%{ background-position:40px 0;} }
+  @keyframes blinkDot{ 0%,100%{ opacity:1;} 50%{ opacity:.25;} }
+  @keyframes lanyardSwing{ 0%,100%{ transform:rotate(-3deg);} 50%{ transform:rotate(3deg);} }
+
+  .app{ display:flex; height:100vh; width:100vw; }
+
+  /* ===== SIDEBAR — cassette spine ===== */
+  .sidebar{
+    width:236px; flex-shrink:0; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg, var(--tape-2), var(--tape));
+    border-right:2px solid var(--brass);
+    padding:1.8rem 1.1rem;
+    display:flex; flex-direction:column;
+    animation:fadeUp .5s ease-out;
+  }
+  .cassette-window{
+    display:flex; align-items:center; justify-content:space-around;
+    background:var(--ink); border:2px solid var(--brass); border-radius:10px;
+    padding:.9rem .6rem; margin-bottom:1.6rem; position:relative;
+  }
+  .reel{
+    width:38px; height:38px; border-radius:50%;
+    border:3px solid var(--brass);
+    background:
+      radial-gradient(circle at center, var(--tape) 0 6px, transparent 6.5px),
+      repeating-conic-gradient(var(--soft) 0 20deg, transparent 20deg 40deg);
+    animation:reelSpin 4s linear infinite;
+  }
+  .cassette-label{
+    position:absolute; bottom:-11px; left:50%; transform:translateX(-50%);
+    background:var(--brass); color:var(--ink); font-family:'IBM Plex Mono', monospace;
+    font-size:.58rem; font-weight:600; padding:2px 10px; border-radius:4px; white-space:nowrap;
+  }
+
+  .brand{ display:flex; align-items:center; gap:11px; margin-bottom:2rem; }
+  .mini-avatar{
+    width:36px; height:36px; border-radius:50%; background:var(--ink);
+    border:2px solid var(--brass); display:flex; align-items:center; justify-content:center;
+    color:var(--brass); font-size:1rem; object-fit:cover;
+    overflow:hidden; flex-shrink:0;
+  }
+  .brand .who .name{ font-family:'Bebas Neue', sans-serif; font-size:1.4rem; letter-spacing:.04em; color:var(--cream); line-height:1; }
+  .brand .who .status{ font-size:.62rem; color:var(--teal); font-weight:600; text-transform:uppercase; letter-spacing:.08em; margin-top:3px; }
+  .brand .who .status i{ animation:blinkDot 1.6s infinite; margin-right:4px; }
+
+  nav{ display:flex; flex-direction:column; gap:2px; flex:1; }
+  nav a{
+    display:flex; align-items:center; gap:10px; padding:.6rem .7rem;
+    color:var(--soft); text-decoration:none; font-size:.82rem; font-weight:600;
+    border-left:3px solid transparent; transition:.2s;
+  }
+  nav a i{ width:16px; font-size:.85rem; }
+  nav a:hover{ color:var(--cream); border-left-color:var(--teal); background:rgba(60,122,116,0.08); }
+  nav a.active{ color:var(--brass); border-left-color:var(--brass); background:rgba(192,138,62,0.08); }
+
+  /* ===== MAIN ===== */
+  .main{ flex:1; padding:2.3rem 3.1rem; overflow-y:auto; height:100vh; scroll-behavior:smooth; background:var(--cream); color:var(--ink); }
+  .section-anchor{ scroll-margin-top:1rem; }
+
+  .top-bar{ display:flex; justify-content:space-between; align-items:flex-end; gap:1rem; flex-wrap:wrap; margin-bottom:2rem; animation:fadeUp .5s ease-out .05s backwards; }
+  .top-bar .greeting .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:600; margin-bottom:4px; }
+  .top-bar .greeting h2{ font-family:'Bebas Neue', sans-serif; font-size:2.6rem; letter-spacing:.02em; color:var(--ink); line-height:1; }
+  .top-bar .greeting p{ color:var(--soft); font-size:.85rem; margin-top:6px; max-width:560px; line-height:1.5; }
+  .top-bar .actions{ display:flex; gap:.6rem; }
+  .top-bar .actions button, .top-bar .actions a{
+    background:var(--ink); border:none; padding:.6rem 1.1rem;
+    font-weight:700; color:var(--cream); display:flex; align-items:center; gap:7px; cursor:pointer;
+    font-size:.76rem; border-radius:3px; transition:.15s; text-decoration:none;
+  }
+  .top-bar .actions button:hover, .top-bar .actions a:hover{ background:var(--brass); color:var(--ink); transform:translateY(-2px); }
+
+  /* liner-note track cards */
+  .section-card{
+    background:var(--card); border:1px solid var(--line); border-left:5px solid var(--brass);
+    padding:1.7rem 2rem 2rem; margin-bottom:1.5rem; position:relative;
+    animation:fadeUp .4s ease-out backwards; border-radius:4px;
+  }
+  .section-card:nth-of-type(1){ animation-delay:.03s; }
+  .section-card:nth-of-type(2){ animation-delay:.06s; }
+  .section-card:nth-of-type(3){ animation-delay:.09s; }
+  .section-card:nth-of-type(4){ animation-delay:.12s; }
+  .section-card:nth-of-type(5){ animation-delay:.15s; }
+  .section-card:nth-of-type(6){ animation-delay:.18s; }
+  .section-card:nth-of-type(7){ animation-delay:.21s; }
+  .section-card:nth-of-type(8){ animation-delay:.24s; }
+  .section-card:last-child{ margin-bottom:0; }
+
+  .card-header{ display:flex; align-items:baseline; gap:12px; margin-bottom:1.2rem; padding-bottom:.7rem;
+    border-bottom:1px dashed var(--line);
+    background-image:repeating-linear-gradient(90deg, var(--teal) 0 6px, transparent 6px 12px);
+    background-size:100% 3px; background-repeat:no-repeat; background-position:bottom;
+  }
+  .card-header .track-no{ font-family:'IBM Plex Mono', monospace; font-size:.72rem; color:var(--teal); font-weight:600; background:rgba(60,122,116,0.1); padding:2px 8px; border-radius:3px; }
+  .card-header h3{ font-family:'Bebas Neue', sans-serif; font-size:1.5rem; letter-spacing:.03em; color:var(--ink); }
+  .card-body{ font-size:.9rem; line-height:1.75; color:var(--soft); }
+
+  /* ID lanyard */
+  .lanyard-wrap{ display:flex; flex-direction:column; align-items:center; margin:0 auto 1.2rem; transform-origin:top center; animation:lanyardSwing 3.2s ease-in-out infinite; }
+  .lanyard-strap{
+    width:34px; height:70px;
+    background:repeating-linear-gradient(180deg, var(--teal) 0 10px, var(--brass) 10px 20px);
+    clip-path:polygon(35% 0, 65% 0, 100% 100%, 0 100%);
+  }
+  .lanyard-clip{
+    width:22px; height:14px; background:#9a9280; border-radius:3px; margin-top:-2px;
+    box-shadow:inset 0 -2px 3px rgba(0,0,0,0.25);
+  }
+  .id-card{
+    background:var(--card); border:2px solid var(--ink); border-radius:10px;
+    width:200px; padding:14px 14px 16px; margin-top:-4px; text-align:center;
+    box-shadow:0 10px 24px rgba(0,0,0,0.35);
+    transform:rotate(-1.5deg);
+  }
+  .id-card .id-punch{
+    width:26px; height:9px; background:var(--tape); border-radius:6px; margin:0 auto 8px;
+  }
+  .id-card .id-label{ font-family:'IBM Plex Mono', monospace; font-size:.58rem; letter-spacing:.1em; color:var(--teal); font-weight:600; text-transform:uppercase; }
+
+  /* home / avatar cassette-reel style */
+  .avatar-wrap{ position:relative; width:120px; margin:0 auto .9rem; }
+  .avatar{
+    width:120px; height:120px; border-radius:50%;
+    border:3px solid var(--brass);
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.2rem; color:var(--brass);
+    object-fit:cover; overflow:hidden;
+  }
+
+  .motto-box{
+    font-size:.95rem; font-style:italic; color:var(--ink); text-align:center;
+    margin-top:1rem; padding:.8rem 1.2rem; border-top:1px dashed var(--line); border-bottom:1px dashed var(--line);
+  }
+  .motto-box i{ color:var(--brass); margin-right:6px; }
+
+  .mile-tag{
+    margin-top:1rem; display:inline-block; font-family:'IBM Plex Mono', monospace;
+    font-size:.68rem; color:var(--cream); background:var(--ink); padding:6px 14px; border-radius:20px;
+  }
+  .mile-tag i{ margin-right:6px; color:var(--brass); }
+
+  .bio-text p{ margin-bottom:11px; }
+  .bio-text strong{ color:var(--ink); }
+  .bio-text .highlight{ color:var(--brass); font-weight:700; }
+  .bio-text .interests{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .bio-text .interests span{
+    background:var(--ink); color:var(--cream); padding:5px 14px; border-radius:20px;
+    font-size:.76rem; font-weight:600; display:flex; align-items:center; gap:6px;
+  }
+  .bio-text .interests span i{ color:var(--brass); }
+  .bio-text .goal-box{ border-left:4px solid var(--teal); background:rgba(60,122,116,0.06); padding:12px 16px; margin-top:8px; }
+  .bio-text .goal-box i{ color:var(--teal); margin-right:8px; }
+
+  .info-line{ display:flex; flex-wrap:wrap; padding:.5rem 0; border-bottom:1px dotted var(--line); }
+  .info-line:last-child{ border-bottom:none; }
+  .info-tag{ min-width:150px; font-family:'IBM Plex Mono', monospace; font-size:.68rem; color:var(--teal); font-weight:600; align-self:center; text-transform:uppercase; letter-spacing:.03em; }
+  .info-value{ color:var(--ink); font-size:.9rem; font-weight:600; }
+
+  .skill-chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .chip{
+    background:var(--ink); color:var(--cream); padding:5px 14px; font-size:.76rem; font-weight:700;
+    border-radius:3px; transition:.15s;
+  }
+  .chip:hover{ background:var(--brass); color:var(--ink); }
+  .chip.soft{ background:rgba(60,122,116,0.12); color:var(--teal); }
+  .chip.soft:hover{ background:var(--teal); color:var(--cream); }
+
+  .skill-bar{ margin-bottom:1.05rem; }
+  .skill-bar .row{ display:flex; justify-content:space-between; font-size:.83rem; color:var(--soft); margin-bottom:5px; font-weight:600; }
+  .skill-bar .row span:last-child{ color:var(--brass); font-family:'IBM Plex Mono', monospace; }
+  .skill-bar .track{ background:var(--line); height:8px; border-radius:0; overflow:hidden; position:relative; }
+  .skill-bar .fill{
+    height:100%; width:0%; transition:width 1.6s cubic-bezier(.4,0,.2,1);
+    background:repeating-linear-gradient(90deg, var(--brass) 0 8px, var(--teal) 8px 16px);
+    background-size:200% 100%;
+    animation:waveMove 3s linear infinite;
+  }
+
+  .project-item{
+    border-left:4px solid var(--teal); background:rgba(0,0,0,0.02);
+    padding:1rem 1.2rem; margin-bottom:.8rem; transition:.2s;
+  }
+  .project-item:hover{ background:rgba(192,138,62,0.06); border-left-color:var(--brass); transform:translateX(4px); }
+  .project-item h4{ font-family:'Bebas Neue', sans-serif; font-size:1.25rem; letter-spacing:.02em; color:var(--ink); }
+  .project-item h4 i{ color:var(--brass); margin-right:7px; }
+  .project-item p{ font-size:.84rem; color:var(--soft); margin:3px 0; }
+  .project-item .status{
+    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:.65rem; font-weight:700;
+    padding:3px 10px; margin-top:4px; border-radius:20px; background:rgba(60,122,116,0.12); color:var(--teal);
+  }
+  .project-item .status.completed{ background:rgba(192,138,62,0.15); color:var(--brass); }
+
+  .gallery-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:10px; }
+  .gal-item{
+    position:relative; background:var(--tape-2); border:1px solid var(--line);
+    aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; color:var(--soft); transition:.25s;
+    background-size:cover; background-position:center; overflow:hidden; border-radius:4px;
+  }
+  .gal-item:hover{ transform:scale(1.03); }
+  .gal-item .gal-label{
+    position:absolute; bottom:0; left:0; right:0; background:rgba(23,21,26,0.9); color:var(--cream);
+    font-size:.6rem; font-family:'IBM Plex Mono', monospace; padding:3px 6px; text-align:center; opacity:0; transition:.3s;
+  }
+  .gal-item:hover .gal-label{ opacity:1; }
+
+  .contact-item{ display:flex; align-items:center; gap:12px; margin:9px 0; color:var(--ink); font-size:.9rem; font-weight:600; }
+  .contact-item i{ width:20px; color:var(--brass); }
+
+  .cv-preloaded{
+    display:flex; align-items:center; justify-content:space-between;
+    border:1px solid var(--line); border-left:4px solid var(--brass); padding:1rem 1.4rem; margin-top:12px; background:#fff9ec;
+  }
+  .cv-preloaded .cv-info{ display:flex; align-items:center; gap:12px; }
+  .cv-preloaded .cv-info i{ font-size:1.6rem; color:var(--brass); }
+  .cv-preloaded .cv-info .cv-details{ display:flex; flex-direction:column; }
+  .cv-preloaded .cv-name{ color:var(--ink); font-weight:700; font-size:.92rem; }
+  .cv-preloaded .cv-size{ color:var(--teal); font-size:.7rem; font-family:'IBM Plex Mono', monospace; }
+  .cv-preloaded .cv-actions{ display:flex; gap:8px; }
+  .cv-preloaded .cv-actions a, .cv-preloaded .cv-actions button{
+    background:transparent; border:1.5px solid var(--ink); padding:7px 14px; color:var(--ink);
+    cursor:pointer; font-size:.75rem; font-weight:700; border-radius:20px; transition:.15s; text-decoration:none; display:inline-flex; align-items:center; gap:6px;
+  }
+  .cv-preloaded .cv-actions a:hover, .cv-preloaded .cv-actions button:hover{ border-color:var(--brass); color:var(--brass); }
+  .cv-preloaded .cv-actions a.download-btn{ background:var(--ink); color:var(--cream); border-color:var(--ink); }
+  .cv-preloaded .cv-actions a.download-btn:hover{ background:var(--brass); border-color:var(--brass); color:var(--ink); }
+
+  .footer{
+    margin-top:1rem; padding-top:1.2rem; border-top:2px solid var(--ink); display:flex; flex-wrap:wrap;
+    justify-content:space-between; align-items:center; color:var(--soft); font-size:.75rem;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .footer .social a{ color:var(--soft); margin-left:1rem; font-size:1rem; text-decoration:none; transition:.2s; }
+  .footer .social a:hover{ color:var(--brass); transform:translateY(-2px); display:inline-block; }
+
+  .modal-overlay{ display:none; position:fixed; inset:0; background:rgba(23,21,26,0.7); backdrop-filter:blur(3px); z-index:999; justify-content:center; align-items:center; }
+  .modal-overlay.show{ display:flex; animation:fadeUp .3s ease-out; }
+  .modal{ background:var(--card); border-top:5px solid var(--brass); padding:1.8rem 2rem; max-width:400px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.4); border-radius:4px; }
+  .modal h3{ font-family:'Bebas Neue', sans-serif; font-size:1.6rem; color:var(--ink); margin-bottom:1rem; letter-spacing:.02em; }
+  .modal h3 i{ color:var(--brass); }
+  .modal input, .modal textarea, .modal select{
+    width:100%; padding:.6rem .8rem; margin-bottom:.7rem; background:#fff;
+    border:1.5px solid var(--line); color:var(--ink); font-family:'Manrope',sans-serif; outline:none; font-size:.83rem; border-radius:3px;
+  }
+  .modal input:focus, .modal textarea:focus, .modal select:focus{ border-color:var(--brass); }
+  .modal textarea{ resize:vertical; min-height:50px; }
+  .modal .modal-actions{ display:flex; gap:8px; justify-content:flex-end; margin-top:.3rem; }
+  .modal .modal-actions button{
+    padding:.5rem 1.3rem; border:1.5px solid var(--ink); background:transparent; color:var(--ink);
+    cursor:pointer; font-size:.8rem; font-weight:700; border-radius:20px;
+  }
+  .modal .modal-actions button.primary{ background:var(--ink); color:var(--cream); }
+  .modal .modal-actions button:hover{ border-color:var(--brass); color:var(--brass); }
+  .modal .modal-actions button.primary:hover{ background:var(--brass); color:var(--ink); border-color:var(--brass); }
+
+  .toast-stack{ position:fixed; bottom:24px; right:24px; display:flex; flex-direction:column; gap:8px; z-index:1100; max-width:300px; }
+  .toast{
+    background:var(--ink); border-left:4px solid var(--brass); color:var(--cream); padding:.8rem 1rem;
+    font-size:.82rem; box-shadow:0 10px 30px rgba(0,0,0,0.4); animation:fadeUp .3s ease-out; border-radius:4px;
+  }
+  .toast.rust{ border-left-color:#c0503f; }
+
+  @media print {
+    body * { visibility:hidden; }
+    #cvPrint, #cvPrint * { visibility:visible; }
+    #cvPrint{ position:fixed; top:0; left:0; width:100%; height:100%; background:var(--cream); padding:40px; color:var(--ink); font-family:'Manrope',sans-serif; z-index:99999; overflow:auto; }
+  }
+  #cvPrint{
+    display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:var(--cream); padding:40px; color:var(--ink); font-family:'Manrope',sans-serif; z-index:99998; overflow:auto;
+  }
+  #cvPrint .cv-header{ text-align:center; border-bottom:3px solid var(--brass); padding-bottom:20px; margin-bottom:20px; }
+  #cvPrint .cv-header h1{ font-family:'Bebas Neue', sans-serif; font-size:38px; color:var(--ink); letter-spacing:.03em; }
+  #cvPrint .cv-header .title{ font-size:15px; color:var(--teal); font-weight:700; font-family:'IBM Plex Mono',monospace; }
+  #cvPrint .cv-header .contact{ font-size:12px; color:var(--soft); margin-top:8px; }
+  #cvPrint .cv-section{ margin-bottom:16px; }
+  #cvPrint .cv-section h3{ font-family:'Bebas Neue', sans-serif; font-size:22px; color:var(--brass); border-bottom:1px solid var(--line); padding-bottom:4px; margin-bottom:8px; letter-spacing:.02em; }
+  #cvPrint .cv-section .cv-row{ display:flex; justify-content:space-between; padding:2px 0; font-size:13px; }
+  #cvPrint .cv-section .cv-row .label{ color:var(--soft); font-weight:600; font-family:'IBM Plex Mono',monospace; font-size:11px; }
+  #cvPrint .cv-section .cv-row .value{ color:var(--ink); }
+  #cvPrint .cv-section .skill-tag{ display:inline-block; background:var(--ink); color:var(--cream); padding:2px 12px; border-radius:20px; font-size:12px; margin:2px 4px 2px 0; }
+  #cvPrint .cv-section .project-item-preview{ border-left:3px solid var(--teal); padding:10px 14px; margin-bottom:8px; }
+  #cvPrint .cv-section .proj-title{ font-weight:700; font-size:14px; color:var(--ink); }
+  #cvPrint .cv-section .proj-desc{ font-size:12px; color:var(--soft); }
+  #cvPrint .cv-section .proj-tech{ font-size:11px; color:var(--brass); font-family:'IBM Plex Mono',monospace; }
+  #cvPrint .cv-close-btn{ position:fixed; top:20px; right:20px; background:var(--ink); color:var(--cream); border:none; padding:10px 20px; cursor:pointer; font-size:14px; font-weight:700; z-index:99999; border-radius:4px; }
+
+  @media (max-width:768px){
+    .sidebar{ width:70px; padding:1.2rem .4rem; }
+    .cassette-window{ display:none; }
+    .brand .who, nav a span{ display:none; }
+    nav a{ justify-content:center; padding:.65rem; }
+    .top-bar .actions button span, .top-bar .actions a span{ display:none; }
+    .main{ padding:1.1rem; }
+    .section-card{ padding:1.3rem; }
+  }
+  @media (max-width:480px){
+    .gallery-grid{ gap:8px; }
+    .modal{ padding:1.4rem; }
+    .section-card{ padding:1.1rem; }
+    .avatar, .avatar-wrap{ width:96px; height:96px; }
+    .cv-preloaded{ flex-direction:column; gap:12px; text-align:center; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sidebar">
+    <div class="cassette-window">
+      <div class="reel"></div>
+      <div class="reel" style="animation-direction:reverse;"></div>
+      <div class="cassette-label">SIDE A · BSIT-1</div>
+    </div>
+    <div class="brand">
+      <img class="mini-avatar" id="miniAvatar" src="https://placehold.co/72x72/211f24/c08a3e?text=JB" alt="Jboy's profile photo" />
+      <div class="who">
+        <div class="name">Jboy</div>
+        <div class="status"><i class="fas fa-circle"></i>now playing</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#home" class="active" onclick="scrollToSection('home')"><i class="fas fa-house"></i> <span>Home</span></a>
+      <a href="#about" onclick="scrollToSection('about')"><i class="fas fa-id-badge"></i> <span>About</span></a>
+      <a href="#education" onclick="scrollToSection('education')"><i class="fas fa-graduation-cap"></i> <span>Education</span></a>
+      <a href="#skills" onclick="scrollToSection('skills')"><i class="fas fa-layer-group"></i> <span>Skills</span></a>
+      <a href="#projects" onclick="scrollToSection('projects')"><i class="fas fa-folder-open"></i> <span>Projects</span></a>
+      <a href="#certificates" onclick="scrollToSection('certificates')"><i class="fas fa-medal"></i> <span>Certificates</span></a>
+      <a href="#gallery" onclick="scrollToSection('gallery')"><i class="fas fa-images"></i> <span>Gallery</span></a>
+      <a href="#resume" onclick="scrollToSection('resume')"><i class="fas fa-file-lines"></i> <span>Resume</span></a>
+      <a href="#contact" onclick="scrollToSection('contact')"><i class="fas fa-envelope"></i> <span>Contact</span></a>
+    </nav>
+  </div>
+
+  <div class="main" id="mainContent">
+    <div class="top-bar">
+      <div class="greeting">
+        <div class="eyebrow">Now Playing · Side A, Track 01</div>
+        <h2>Jboy's Mixtape</h2>
+        <p>My name is Asterio II Quiapo Badang — everyone calls me Jboy. This profile is my own liner notes: academics, projects, and the things I geek out on between classes.</p>
+      </div>
+      <div class="actions">
+        <button onclick="openModal()"><i class="fas fa-plus"></i> <span>Add Project</span></button>
+        <a id="downloadCvBtn" href="https://example.com/path-to-jboy-cv.pdf" download="Asterio_Badang_CV.pdf"><i class="fas fa-download"></i> <span>Download CV</span></a>
+      </div>
+    </div>
+
+    <div id="home" class="section-card section-anchor">
+      <div class="card-header"><span class="track-no">TRACK 01</span><h3>Home</h3></div>
+      <div class="card-body" style="text-align:center;">
+        <div class="lanyard-wrap">
+          <div class="lanyard-strap"></div>
+          <div class="lanyard-clip"></div>
+          <div class="id-card">
+            <div class="id-punch"></div>
+            <div class="avatar-wrap" style="margin-bottom:.5rem;">
+              <img class="avatar" id="avatarCircle" src="https://placehold.co/240x240/211f24/c08a3e?text=JB" alt="Jboy's profile photo" />
+            </div>
+            <div class="id-label">Student ID · 1910057</div>
+          </div>
+        </div>
+        <h3 class="display" style="color:var(--ink); font-size:1.9rem;">ASTERIO II QUIAPO BADANG</h3>
+        <p style="color:var(--soft); font-size:.85rem;">« Jboy »</p>
+        <div class="motto-box"><i class="fas fa-quote-left"></i>Do the best you can until you know better. Then when you know better, do better.</div>
+        <div class="mile-tag"><i class="fas fa-bicycle"></i> Cycling · IT Student · BSIT-1</div>
+      </div>
+    </div>
+
+    <div id="about" class="section-card section-anchor">
+      <div class="card-header"><span class="track-no">TRACK 02</span><h3>About Me</h3></div>
+      <div class="card-body">
+        <div class="info-line"><span class="info-tag">Full Name</span><span class="info-value">ASTERIO II QUIAPO BADANG</span></div>
+        <div class="info-line"><span class="info-tag">Age</span><span class="info-value">19</span></div>
+        <div class="info-line"><span class="info-tag">Birthday</span><span class="info-value">April 18, 2007</span></div>
+        <div class="info-line"><span class="info-tag">Address</span><span class="info-value">P-5 Caramcam, Mangagoy, Bislig City</span></div>
+        <div class="info-line"><span class="info-tag">Course</span><span class="info-value">BSIT - 1st Year</span></div>
+        <div class="info-line"><span class="info-tag">School</span><span class="info-value">De La Salle John Bosco College</span></div>
+
+        <div class="bio-text" style="margin-top:14px; border-top:1px dotted var(--line); padding-top:14px;">
+          <p>
+            <strong>Asterio II Quiapo Badang</strong> is a 19-year-old first-year <span class="highlight">Bachelor of Science in Information Technology (BSIT)</span> student at <strong>De La Salle John Bosco College</strong>. Born on <span class="highlight">April 18, 2007</span> in P-5 Caramcam District, Mangagoy, Bislig City, Surigao del Sur.
+          </p>
+          <p>
+            I enjoy learning new things and improving myself every day. My biggest passion is <span class="highlight">playing the drums</span> — music helps me express what words can't. Outside of that, you'll usually find me on the badminton court, over a chessboard, or out on a bike ride.
+          </p>
+          <div class="interests">
+            <span><i class="fas fa-drum"></i> Drums</span>
+            <span><i class="fas fa-table-tennis"></i> Badminton</span>
+            <span><i class="fas fa-circle"></i> Pickleball</span>
+            <span><i class="fas fa-chess"></i> Chess</span>
+            <span><i class="fas fa-chess-board"></i> Checkers</span>
+          </div>
+          <div class="goal-box">
+            <i class="fas fa-bullseye"></i>
+            <strong>My goal</strong> is to finish my degree, build a solid career in Information Technology, and support my family. With hard work, determination, and faith, I believe I can get there.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="education" class="section-card section-anchor">
+      <div class="card-header"><span class="track-no">TRACK 03</span><h3>Educational Timeline</h3></div>
+      <div class="card-body">
+        <div class="info-line"><span class="info-tag">Elementary</span><span class="info-value">Hilltop Elementary School</span></div>
+        <div class="info-line"><span class="info-tag">Junior High</span><span class="info-value">De La Salle John Bosco College</span></div>
+        <div class="info-line"><span class="info-tag">Senior High</span><span class="info-value">De La Salle John Bosco College</span></div>
+        <div class="info-line"><span class="info-tag">College — now</span><span class="info-value" style="color:var(--brass);">De La Salle John Bosco College · BSIT</span></div>
+      </div>
+    </div>
+
+    <div id="skills" class="section-card section-anchor">
+      <div class="card-header"><span class="track-no">TRACK 04</span><h3>Technical Skills</h3></div>
+      <div class="card-body">
+        <div style="margin-bottom:10px;"><strong style="color:var(--ink); font-size:.85rem;">Programming</strong></div>
+        <div class="skill-bar"><div class="row"><span>HTML / CSS</span><span>75%</span></div><div class="track"><div class="fill" style="width:75%;"></div></div></div>
+        <div class="skill-bar"><div class="row"><span>JavaScript</span><span>60%</span></div><div class="track"><div class="fill" style="width:60%;"></div></div></div>
+        <div class="skill-bar"><div class="row"><span>Python</span><span>55%</span></div><div class="track"><div class="fill" style="width:55%;"></div></div></div>
+        <div class="skill-bar"><div class="row"><span>Java</span><span>50%</span></div><div class="track"><div class="fill" style="width:50%;"></div></div></div>
+
+        <div style="margin-top:14px; margin-bottom:8px;"><strong style="color:var(--ink); font-size:.85rem;">Software</strong></div>
+        <div class="skill-chips"><span class="chip">MS Office</span><span class="chip">VS Code</span><span class="chip">Canva</span><span class="chip">Git</span></div>
+
+        <div style="margin-top:12px; margin-bottom:8px;"><strong style="color:var(--ink); font-size:.85rem;">Soft Skills</strong></div>
+        <div class="skill-chips"><span class="chip soft">Adaptability</span><span class="chip soft">Critical Thinking</span><span class="chip soft">Time Management</span><span class="chip soft">Teamwork</span></div>
+      </div>
+    </div>
+
+    <div id="projects" class="section-card section-anchor">
+      <div class="card-header"><span class="track-no">TRACK 05</span><h3>Projects <span style="font-size:.68rem; color:var(--soft); font-weight:500; margin-left:6px;" id="projectCount">(2)</span></h3></div>
+      <div class="card-body" id="projectList">
+        <div class="project-item" data-id="1">
+          <h4><i class="fas fa-globe"></i> Personal Portfolio</h4>
+          <p>Responsive profile page with interactive elements.</p>
+          <p style="color:var(--soft); font-size:.8rem;"><i class="fas fa-code"></i> HTML, CSS, JS</p>
+          <span class="status"><i class="fas fa-spinner"></i> In Progress</span>
+        </div>
+        <div class="project-item" data-id="2">
+          <h4><i class="fas fa-boxes-stacked"></i> Inventory System</h4>
+          <p>Console-based tracking system built with Java.</p>
+          <p style="color:var(--soft); font-size:.8rem;"><i class="fab fa-java"></i> Java</p>
+          <span class="status completed"><i class="fas fa-check"></i> Completed</span>
+        </div>
+      </div>
+      <button onclick="openModal()" style="margin-top:10px; background:transparent; border:1.5px solid var(--ink); color:var(--ink); padding:8px 22px; border-radius:20px; cursor:pointer; font-size:.85rem; font-weight:700;">
+        <i class="fas fa-plus" style="color:var(--brass);"></i> Add Project
+      </button>
+    </div>
+
+    <div id="certificates" class="section-card section-anchor">
+      <div class="card-header"><span class="track-no">TRACK 06</span><h3>Credentials & Awards</h3></div>
+      <div class="card-body">
+        <div class="info-line"><span class="info-tag">Trainings</span><span class="info-value">N/A</span></div>
+        <div class="info-line"><span class="info-tag">Seminars</span><span class="info-value">N/A</span></div>
+        <div class="info-line"><span class="info-tag">Certificates</span><span class="info-value">Honor Certificate</span></div>
+        <div class="info-line"><span class="info-tag">Academic Awards</span><span class="info-value">Honor Award</span></div>
+      </div>
+    </div>
+
+    <div id="gallery" class="section-card section-anchor">
+      <div class="card-header"><span class="track-no">TRACK 07</span><h3>Gallery</h3></div>
+      <div class="card-body">
+        <p style="color:var(--soft); font-size:.76rem; margin-bottom:10px;">
+          <i class="fas fa-user" style="color:var(--brass);"></i> Personal &nbsp;·&nbsp; <i class="fas fa-school" style="color:var(--brass);"></i> School &nbsp;·&nbsp; <i class="fas fa-users" style="color:var(--brass);"></i> Org &nbsp;·&nbsp; <i class="fas fa-tree" style="color:var(--brass);"></i> Community
+        </p>
+        <div class="gallery-grid" id="galleryGrid">
+          <div class="gal-item" style="background-image:url('idk.jpg')">
+            <span class="gal-label">friends</span>
+          </div>
+          <div class="gal-item" style="background-image:url('cake.jpg')">
+            <span class="gal-label">cake</span>
+          </div>
+          <div class="gal-item" style="background-image:url('https://placehold.co/300x300/17151a/c08a3e?text=Org')">
+            <span class="gal-label">Organizational event</span>
+          </div>
+          <div class="gal-item" style="background-image:url('https://placehold.co/300x300/17151a/3c7a74?text=Community')">
+            <span class="gal-label">Community involvement</span>
+          </div>
+          <div class="gal-item" style="background-image:url('https://placehold.co/300x300/17151a/c08a3e?text=Personal')">
+            <span class="gal-label">Personal photo</span>
+          </div>
+          <div class="gal-item" style="background-image:url('https://placehold.co/300x300/17151a/3c7a74?text=School')">
+            <span class="gal-label">School activity</span>
+          </div>
+        </div>
+        <p style="font-size:.66rem; color:var(--soft); margin-top:10px;">To change a photo, replace its image link in the code.</p>
+      </div>
+    </div>
+
+    <div id="resume" class="section-card section-anchor">
+      <div class="card-header"><span class="track-no">TRACK 08</span><h3>Curriculum Vitae</h3></div>
+      <div class="card-body">
+        <div class="cv-preloaded" id="cvPreloaded">
+          <div class="cv-info">
+            <i class="fas fa-file-pdf"></i>
+            <div class="cv-details">
+              <span class="cv-name">Asterio_Badang_CV.pdf</span>
+              <span class="cv-size">~ 245 KB</span>
+            </div>
+          </div>
+          <div class="cv-actions">
+            <a class="download-btn" href="https://example.com/path-to-jboy-cv.pdf" download="Asterio_Badang_CV.pdf"><i class="fas fa-download"></i> Download</a>
+            <button onclick="showToast('📄 Your CV is ready for download!')"><i class="fas fa-info-circle"></i> Info</button>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div class="info-line"><span class="info-tag">Work Experience</span><span class="info-value">N/A</span></div>
+          <div class="info-line"><span class="info-tag">References</span><span class="info-value">Available upon request</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="contact" class="section-card section-anchor">
+      <div class="card-header"><span class="track-no">TRACK 09</span><h3>Get In Touch</h3></div>
+      <div class="card-body">
+        <div class="contact-item"><i class="fas fa-envelope"></i> jboybadang@gmail.com</div>
+        <div class="contact-item"><i class="fas fa-phone-alt"></i> 0910 771 9692 / 0992 807 1516</div>
+        <div class="contact-item"><i class="fab fa-facebook"></i> jboybadang</div>
+        <div class="contact-item"><i class="fab fa-linkedin"></i> (Optional)</div>
+        <div style="border:1.5px dashed var(--line); padding:14px; margin-top:12px; font-size:.88rem;">
+          <i class="fas fa-comment" style="color:var(--brass);"></i> Contact Form: 09928071516
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>© 2026 ASTERIO II QUIAPO BADANG · ALL RIGHTS RESERVED</div>
+      <div class="social">
+        <a href="https://facebook.com/jboybadang" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+        <a href="https://instagram.com/jboybadang" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/jboybadang" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://youtube.com/@JboyBadang" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+        <span style="margin-left:.8rem;"><i class="far fa-calendar-alt"></i> Updated: 2026-07-07</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="cvPrint">
+  <button class="cv-close-btn" onclick="closeCvPreview()">✕ Close</button>
+  <div class="cv-header">
+    <h1>ASTERIO II QUIAPO BADANG</h1>
+    <div class="title">BSIT STUDENT</div>
+    <div class="contact">jboybadang@gmail.com | 0910 771 9692 / 0992 807 1516 | P-5 Caramcam, Mangagoy, Bislig City</div>
+  </div>
+  <div class="cv-section">
+    <h3>Profile</h3>
+    <p style="font-size:13px; color:var(--soft); line-height:1.6;">A 19-year-old college student at De La Salle John Bosco College with a growing foundation in web development and programming. Skilled in HTML, CSS, JavaScript, Java, SQL, and Python. Patient, persistent, and detail-oriented with strong time management skills.</p>
+  </div>
+  <div class="cv-section">
+    <h3>Education</h3>
+    <div class="cv-row"><span class="label">COLLEGE — NOW</span><span class="value">De La Salle John Bosco College · BSIT</span></div>
+    <div class="cv-row"><span class="label">SENIOR HIGH</span><span class="value">De La Salle John Bosco College</span></div>
+    <div class="cv-row"><span class="label">JUNIOR HIGH</span><span class="value">De La Salle John Bosco College</span></div>
+    <div class="cv-row"><span class="label">ELEMENTARY</span><span class="value">Hilltop Elementary School</span></div>
+  </div>
+  <div class="cv-section">
+    <h3>Skills</h3>
+    <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px;">
+      <span class="skill-tag">HTML/CSS</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Python</span>
+      <span class="skill-tag">Java</span><span class="skill-tag">SQL</span><span class="skill-tag">MS Office</span>
+      <span class="skill-tag">VS Code</span><span class="skill-tag">Canva</span><span class="skill-tag">Git</span>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:4px;">
+      <span class="skill-tag">Adaptability</span><span class="skill-tag">Critical Thinking</span>
+      <span class="skill-tag">Time Management</span><span class="skill-tag">Teamwork</span>
+    </div>
+  </div>
+  <div class="cv-section">
+    <h3>Projects</h3>
+    <div class="project-item-preview">
+      <div class="proj-title">Personal Portfolio Website</div>
+      <div class="proj-desc">Responsive personal profile page built from scratch using HTML, CSS, and JavaScript.</div>
+      <div class="proj-tech">HTML · CSS · JavaScript</div>
+    </div>
+    <div class="project-item-preview">
+      <div class="proj-title">Inventory System</div>
+      <div class="proj-desc">Console-based tracking system for managing stock records.</div>
+      <div class="proj-tech">Java</div>
+    </div>
+  </div>
+  <div class="cv-section">
+    <h3>Achievements</h3>
+    <div style="display:flex; gap:16px; flex-wrap:wrap; font-size:13px; color:var(--soft);">
+      <span>Honor Certificate</span>
+      <span>Honor Award</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <h3><i class="fas fa-plus-circle"></i> New Project</h3>
+    <input type="text" id="projectName" placeholder="Project Title" />
+    <input type="text" id="projectTech" placeholder="Technologies" />
+    <textarea id="projectDesc" placeholder="Description"></textarea>
+    <select id="projectStatus">
+      <option value="In Progress">In Progress</option>
+      <option value="Completed">Completed</option>
+      <option value="Planning">Planning</option>
+    </select>
+    <div class="modal-actions">
+      <button onclick="closeModal()">Cancel</button>
+      <button class="primary" onclick="addProject()">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script>
+  let projectId = 3;
+
+  function showToast(message, variant) {
+    const stack = document.getElementById('toastStack');
+    const toast = document.createElement('div');
+    toast.className = 'toast' + (variant === 'rust' ? ' rust' : '');
+    toast.textContent = message;
+    stack.appendChild(toast);
+    setTimeout(() => {
+      toast.style.transition = 'opacity .3s';
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 3200);
+  }
+
+  function downloadCv() {
+    const cvPrint = document.getElementById('cvPrint');
+    cvPrint.style.display = 'block';
+    showToast('📄 Opening CV preview... Click "Save as PDF" in the print dialog.');
+    setTimeout(() => { window.print(); }, 500);
+  }
+  function closeCvPreview() { document.getElementById('cvPrint').style.display = 'none'; }
+  window.addEventListener('beforeprint', function() { document.getElementById('cvPrint').style.display = 'block'; });
+  window.addEventListener('afterprint', function() {
+    setTimeout(() => { document.getElementById('cvPrint').style.display = 'none'; showToast('✅ CV downloaded successfully!'); }, 500);
+  });
+
+  function openModal() {
+    document.getElementById('projectModal').classList.add('show');
+    document.getElementById('projectName').value = '';
+    document.getElementById('projectTech').value = '';
+    document.getElementById('projectDesc').value = '';
+    document.getElementById('projectStatus').value = 'In Progress';
+  }
+  function closeModal() { document.getElementById('projectModal').classList.remove('show'); }
+  function addProject() {
+    const name = document.getElementById('projectName').value.trim();
+    const tech = document.getElementById('projectTech').value.trim();
+    const desc = document.getElementById('projectDesc').value.trim();
+    const status = document.getElementById('projectStatus').value;
+    if (!name) { showToast('Enter a project title.', 'rust'); return; }
+    const list = document.getElementById('projectList');
+    const item = document.createElement('div');
+    item.className = 'project-item';
+    item.dataset.id = projectId++;
+    const statusClass = status === 'Completed' ? 'completed' : '';
+    const icon = status === 'Completed' ? 'fa-check' : status === 'In Progress' ? 'fa-spinner' : 'fa-clock';
+    item.innerHTML = `
+      <h4><i class="fas fa-folder"></i> ${name}</h4>
+      <p>${desc || 'No description.'}</p>
+      <p style="color:var(--soft); font-size:.8rem;"><i class="fas fa-code"></i> ${tech || 'Not specified'}</p>
+      <span class="status ${statusClass}"><i class="fas ${icon}"></i> ${status}</span>
+    `;
+    list.appendChild(item);
+    updateProjectCount();
+    closeModal();
+    showToast(`✅ Project "${name}" added.`);
+  }
+  function updateProjectCount() {
+    const count = document.querySelectorAll('#projectList .project-item').length;
+    document.getElementById('projectCount').textContent = `(${count})`;
+  }
+
+  function scrollToSection(id) {
+    const section = document.getElementById(id);
+    if (section) {
+      const main = document.getElementById('mainContent');
+      const offset = 80;
+      main.scrollTo({ top: section.offsetTop - offset, behavior: 'smooth' });
+    }
+    document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll('.sidebar nav a').forEach(link => {
+      if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
+    });
+  }
+
+  const main = document.getElementById('mainContent');
+  const sections = ['home','about','education','skills','projects','certificates','gallery','resume','contact'];
+  main.addEventListener('scroll', function() {
+    let current = '';
+    const offset = 100;
+    sections.forEach(id => {
+      const section = document.getElementById(id);
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        const mainRect = main.getBoundingClientRect();
+        if (rect.top - mainRect.top < offset) current = id;
+      }
+    });
+    document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+    document.querySelectorAll('.sidebar nav a').forEach(link => {
+      if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+    });
+  });
+
+  document.getElementById('projectModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeModal(); } });
+
+  updateProjectCount();
+  setTimeout(() => {
+    document.querySelectorAll('.skill-bar .fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0%';
+      setTimeout(() => { el.style.width = w; }, 150);
+    });
+  }, 400);
+</script>
+</body>
+</html>
