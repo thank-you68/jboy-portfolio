@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Basic Education | DLSJBC</title>
-<meta name="description" content="Basic Education (K-10) program at DLSJBC.">
+<title>Admission | DLSJBC</title>
+<meta name="description" content="Admission requirements, steps, and FAQs for DLSJBC applicants.">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -238,57 +238,215 @@
   body.dark .section-head h2{color:#f0f5f1;}
   .muted{color:var(--ink-600);}
 
-  /* Growth path — the K-10 journey as a single ascending trail */
-  .growth-path{position:relative; max-width:800px; margin:0 auto;}
-  .growth-path::before{
-    content:''; position:absolute; left:29px; top:8px; bottom:8px; width:2px;
-    background:linear-gradient(180deg, var(--gold-500), var(--green-600) 48%, var(--green-950));
-    opacity:0.4;
+  /* About cards */
+  .about-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  @media(max-width:980px){.about-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.about-grid{grid-template-columns:1fr;}}
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:32px 26px;
+    box-shadow:var(--shadow-soft); transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    position:relative; overflow:hidden;
   }
-  @media(max-width:600px){.growth-path::before{left:19px;}}
+  .card:hover{transform:translateY(-8px); box-shadow:0 24px 50px -16px rgba(11,61,36,0.28); border-color:var(--gold-400);}
+  .card .num{font-family:'Fraunces',serif; font-style:italic; font-size:0.85rem; color:var(--gold-500); margin-bottom:14px; display:block;}
+  .card h3{font-size:1.15rem; color:var(--green-900); margin-bottom:10px;}
+  body.dark .card h3{color:#dcefe0;}
+  .card p{font-size:0.92rem; color:var(--ink-600); line-height:1.6; margin:0;}
 
-  .tier{position:relative; padding-left:68px; margin-bottom:52px;}
-  .tier:last-child{margin-bottom:0;}
-  @media(max-width:600px){.tier{padding-left:46px;}}
-
-  .tier-dot{
-    position:absolute; left:20px; top:4px; width:20px; height:20px; border-radius:50%;
-    background:var(--tier-color); box-shadow:0 0 0 5px var(--cream-50);
+  /* Academics */
+  .prog-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  @media(max-width:980px){.prog-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.prog-grid{grid-template-columns:1fr;}}
+  .prog-card{
+    border-radius:var(--radius); padding:30px 24px; background:#fff; border:1px solid var(--line);
+    position:relative; overflow:hidden; cursor:pointer; transition:transform .4s ease;
   }
-  body.dark .tier-dot{box-shadow:0 0 0 5px #081712;}
-  @media(max-width:600px){.tier-dot{left:10px;}}
-
-  .tier-kinder{--tier-color:var(--gold-500);}
-  .tier-elem{--tier-color:var(--green-600);}
-  .tier-junior{--tier-color:var(--green-950);}
-  body.dark .tier-junior{--tier-color:var(--green-600);}
-
-  .tier-eyebrow{
-    font-family:'Fraunces',serif; font-style:italic; font-size:0.88rem; color:var(--tier-color);
+  .prog-card::before{
+    content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--green-700),var(--green-950));
+    opacity:0; transition:opacity .4s ease; z-index:0;
   }
-  .tier-title{font-size:1.35rem; color:var(--green-950); margin:5px 0 22px;}
-  body.dark .tier-title{color:#eef3ee;}
-
-  .node-row{display:flex; flex-wrap:wrap; row-gap:22px;}
-  .node{display:flex; flex-direction:column; align-items:center; gap:9px; position:relative; padding-right:26px;}
-  .node:last-child{padding-right:0;}
-  .node::after{
-    content:''; position:absolute; top:23px; right:2px; width:24px; height:2px; background:var(--line);
+  .prog-card:hover::before{opacity:1;}
+  .prog-card:hover{transform:translateY(-6px) scale(1.02);}
+  .prog-card > *{position:relative; z-index:1;}
+  .prog-icon{
+    width:52px;height:52px; border-radius:14px; background:var(--cream-100); display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px; transition:transform .5s ease, background .4s ease;
+    font-size:1.4rem;
   }
-  .node:last-child::after{display:none;}
-  body.dark .node::after{background:#1d3a2a;}
+  .prog-card:hover .prog-icon{transform:rotate(14deg) scale(1.1); background:rgba(255,255,255,0.12);}
+  .prog-card h3{color:var(--green-900); font-size:1.05rem; margin-bottom:8px; transition:color .4s ease;}
+  .prog-card:hover h3{color:#fff;}
+  .prog-card p{color:var(--ink-600); font-size:0.88rem; line-height:1.55; transition:color .4s ease;}
+  .prog-card:hover p{color:#d8e8dd;}
+  .prog-link{display:inline-flex; align-items:center; gap:6px; margin-top:16px; font-size:0.82rem; font-weight:700; color:var(--gold-500);}
 
-  .node-circle{
-    width:46px; height:46px; border-radius:50%; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Poppins',sans-serif; font-weight:800; font-size:0.95rem; color:#fff;
-    background:var(--tier-color); box-shadow:0 8px 18px -8px rgba(11,61,36,0.5);
-    transition:transform .3s ease;
+  /* stats */
+  .stats-wrap{
+    background:linear-gradient(135deg, var(--green-950), var(--green-800));
+    border-radius:28px; padding:70px 40px; display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center;
+    position:relative; overflow:hidden;
   }
-  .node-circle.node-circle-lg{width:58px; height:58px; font-size:1.4rem;}
-  .node:hover .node-circle{transform:translateY(-5px) scale(1.08);}
-  .node-label{font-size:0.78rem; font-weight:600; color:var(--ink-600); white-space:nowrap;}
-  body.dark .node-label{color:#a9bdae;}
+  @media(max-width:780px){.stats-wrap{grid-template-columns:repeat(2,1fr);}}
+  .stat h3{color:#fff; font-size:clamp(2rem,4vw,3.2rem); font-family:'Poppins',sans-serif;}
+  .stat p{color:var(--gold-300); font-size:0.85rem; letter-spacing:0.08em; text-transform:uppercase; margin-top:6px;}
+
+  /* gallery */
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:140px; gap:14px;
+  }
+  @media(max-width:780px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+  .g-item{
+    border-radius:16px; position:relative; overflow:hidden; cursor:pointer;
+    display:flex; align-items:flex-end; padding:16px; color:#fff;
+  }
+  .g-item span{position:relative; z-index:2; font-weight:700; font-size:0.9rem; transform:translateY(10px); opacity:0; transition:all .35s ease;}
+  .g-item::after{content:''; position:absolute; inset:0; background:linear-gradient(0deg, rgba(7,39,26,0.85), transparent 60%); opacity:0; transition:opacity .35s ease;}
+  .g-item:hover::after, .g-item:hover span{opacity:1; transform:translateY(0);}
+  .g-item img, .g-item .fill{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+  .g-item:hover img, .g-item:hover .fill{transform:scale(1.1);}
+  .g1{grid-column:span 2; grid-row:span 2;}
+  .g2{grid-column:span 1; grid-row:span 1;}
+  .g3{grid-column:span 1; grid-row:span 2;}
+  .g4{grid-column:span 2; grid-row:span 1;}
+  .g5{grid-column:span 1; grid-row:span 1;}
+  .g6{grid-column:span 1; grid-row:span 1;}
+
+  /* articles */
+  .article-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  @media(max-width:900px){.article-grid{grid-template-columns:1fr;}}
+  .article-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:30px 26px;
+    box-shadow:var(--shadow-soft); transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .article-card:hover{transform:translateY(-8px); box-shadow:0 20px 44px -16px rgba(11,61,36,0.3); border-color:var(--gold-400);}
+  .article-cat{font-size:0.78rem; color:var(--gold-500); font-weight:700; letter-spacing:0.05em; text-transform:uppercase;}
+  .article-card h3{margin:12px 0 10px; font-size:1.08rem; color:var(--green-950); line-height:1.35;}
+  body.dark .article-card h3{color:#eef3ee;}
+  .article-card p{color:var(--ink-600); font-size:0.9rem; line-height:1.6; margin:0 0 16px;}
+  .article-meta{display:flex; align-items:center; gap:8px; font-size:0.8rem; color:var(--ink-600);}
+  body.dark .article-meta{color:#a9bdae;}
+  .article-read{font-size:0.85rem; font-weight:700; color:var(--green-800); display:inline-flex; align-items:center; gap:6px; margin-top:14px;}
+  body.dark .article-read{color:var(--gold-400);}
+
+  /* news */
+  .news-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  @media(max-width:900px){.news-grid{grid-template-columns:1fr;}}
+  .news-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+    transition:transform .35s ease, box-shadow .35s ease;
+  }
+  .news-card:hover{transform:translateY(-8px); box-shadow:0 20px 44px -16px rgba(11,61,36,0.3); border-color:var(--gold-400);}
+  .news-thumb{height:180px; background:linear-gradient(135deg,var(--green-700),var(--green-950)); position:relative;}
+  .news-tag{position:absolute; top:14px; left:14px; background:var(--gold-500); color:var(--green-950); font-size:0.7rem; font-weight:700; padding:5px 12px; border-radius:999px; text-transform:uppercase; letter-spacing:0.05em;}
+  .news-body{padding:24px;}
+  .news-date{font-size:0.78rem; color:var(--gold-500); font-weight:700; letter-spacing:0.05em;}
+  .news-body h3{margin:10px 0 10px; font-size:1.08rem; color:var(--green-950); line-height:1.35;}
+  body.dark .news-body h3{color:#eef3ee;}
+  .news-body p{color:var(--ink-600); font-size:0.88rem; line-height:1.55; margin:0 0 16px;}
+  .news-read{font-size:0.85rem; font-weight:700; color:var(--green-800); display:inline-flex; align-items:center; gap:6px;}
+  body.dark .news-read{color:var(--gold-400);}
+
+  /* timeline */
+  .timeline{position:relative; max-width:760px; margin:0 auto; padding-left:34px;}
+  .timeline::before{content:''; position:absolute; left:8px; top:6px; bottom:6px; width:2px; background:var(--line);}
+  .t-item{position:relative; padding-bottom:44px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-dot{position:absolute; left:-34px; top:4px; width:18px;height:18px; border-radius:50%; background:var(--cream-50); border:3px solid var(--gold-500);}
+  .t-date{font-size:0.78rem; font-weight:700; color:var(--gold-500); letter-spacing:0.06em; text-transform:uppercase;}
+  .t-item h4{margin:8px 0 6px; color:var(--green-950); font-size:1.08rem;}
+  body.dark .t-item h4{color:#eef3ee;}
+  .t-item p{margin:0; color:var(--ink-600); font-size:0.9rem;}
+
+  /* testimonials */
+  .test-wrap{max-width:760px; margin:0 auto; position:relative; min-height:260px;}
+  .test-slide{
+    position:absolute; inset:0; opacity:0; transform:translateY(16px); transition:all .6s ease; pointer-events:none;
+    background:#fff; border:1px solid var(--line); border-radius:24px; padding:44px; text-align:center;
+    box-shadow:var(--shadow-soft);
+  }
+  .test-slide.active{opacity:1; transform:translateY(0); pointer-events:auto;}
+  .quote-mark{font-family:'Fraunces',serif; font-size:3.2rem; color:var(--gold-400); line-height:1; display:block; margin-bottom:6px;}
+  .test-slide p{font-size:1.1rem; color:var(--ink-900); line-height:1.6; font-style:italic;}
+  body.dark .test-slide p{color:#e6ede8;}
+  .test-name{margin-top:20px; font-weight:700; color:var(--green-900);}
+  body.dark .test-name{color:#f0f5f1;}
+  .test-role{font-size:0.8rem; color:var(--gold-500); text-transform:uppercase; letter-spacing:0.06em;}
+  .test-dots{display:flex; gap:8px; justify-content:center; margin-top:300px;}
+  .test-dots button{width:9px;height:9px; border-radius:50%; border:none; background:var(--line); cursor:pointer; transition:all .3s ease;}
+  .test-dots button.active{background:var(--gold-500); width:24px; border-radius:6px;}
+
+  /* map / tour */
+  .tour-wrap{display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:center;}
+  @media(max-width:900px){.tour-wrap{grid-template-columns:1fr;}}
+  .map-frame{border-radius:24px; overflow:hidden; box-shadow:var(--shadow-soft); position:relative; height:380px; border:1px solid var(--line);}
+  .map-frame iframe{width:100%; height:100%; border:0; filter:saturate(0.9);}
+  .pin{
+    position:absolute; width:16px;height:16px; background:var(--gold-500); border-radius:50% 50% 50% 0;
+    transform:rotate(-45deg); box-shadow:0 0 0 6px rgba(201,162,74,0.25);
+    animation:pinpulse 2s ease infinite;
+  }
+  @keyframes pinpulse{0%,100%{box-shadow:0 0 0 6px rgba(201,162,74,0.25);}50%{box-shadow:0 0 0 12px rgba(201,162,74,0.05);}}
+
+  /* orgs */
+  .flip-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  @media(max-width:900px){.flip-grid{grid-template-columns:repeat(2,1fr);}}
+  .flip-card{perspective:1200px; height:200px;}
+  .flip-inner{position:relative; width:100%; height:100%; transition:transform .6s; transform-style:preserve-3d;}
+  .flip-card:hover .flip-inner{transform:rotateY(180deg);}
+  .flip-front, .flip-back{
+    position:absolute; inset:0; backface-visibility:hidden; border-radius:16px; padding:22px;
+    display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+  }
+  .flip-front{background:#fff; border:1px solid var(--line);}
+  .flip-back{background:linear-gradient(135deg,var(--green-800),var(--green-950)); color:#fff; transform:rotateY(180deg);}
+  .flip-front .fi{font-size:2rem; margin-bottom:10px;}
+  .flip-front h4{color:var(--green-900); font-size:0.95rem;}
+  body.dark .flip-front{background:#0f2419;}
+  body.dark .flip-front h4{color:#eef3ee;}
+  .flip-back p{font-size:0.82rem; line-height:1.5;}
+
+  /* contact */
+  .contact-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:50px;}
+  @media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+  .field{margin-bottom:20px; position:relative;}
+  .field input, .field textarea{
+    width:100%; padding:15px 16px; border-radius:12px; border:1.5px solid var(--line); background:#fff;
+    font-family:'Inter',sans-serif; font-size:0.95rem; color:var(--ink-900); transition:border-color .25s ease, box-shadow .25s ease;
+  }
+  body.dark .field input, body.dark .field textarea{background:#0f2419; border-color:#1d3a2a; color:#eef3ee;}
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--gold-500); box-shadow:0 0 0 4px rgba(201,162,74,0.15);}
+  .field label{position:absolute; left:16px; top:15px; color:var(--ink-600); font-size:0.95rem; pointer-events:none; transition:all .2s ease; background:transparent; padding:0 4px;}
+  .field input:focus + label, .field input:not(:placeholder-shown) + label,
+  .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label{
+    top:-9px; left:12px; font-size:0.72rem; background:var(--cream-50); color:var(--gold-500); font-weight:700;
+  }
+  body.dark .field input:focus + label, body.dark .field input:not(:placeholder-shown) + label,
+  body.dark .field textarea:focus + label, body.dark .field textarea:not(:placeholder-shown) + label{background:#081712;}
+  .send-btn{
+    position:relative; overflow:hidden; width:100%; padding:16px; border-radius:12px; border:none; cursor:pointer;
+    background:linear-gradient(135deg,var(--green-700),var(--green-950)); color:#fff; font-weight:700; font-size:0.95rem;
+  }
+  .send-btn:active{transform:scale(0.98);}
+  .contact-info-card{
+    background:linear-gradient(160deg, var(--green-950), var(--green-800)); border-radius:24px; padding:36px; color:#fff;
+    height:100%;
+  }
+  .info-row{display:flex; gap:14px; margin-bottom:22px; align-items:flex-start;}
+  .info-row .ic{width:38px;height:38px; border-radius:10px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .info-row .t{font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold-300);}
+  .info-row .v{font-weight:600; margin-top:2px;}
+  .social-row{display:flex; gap:10px; margin-top:26px;}
+  .social-row a{width:38px;height:38px; border-radius:50%; border:1px solid rgba(255,255,255,0.25); display:flex; align-items:center; justify-content:center; transition:all .25s ease;}
+  .social-row a:hover{background:var(--gold-500); border-color:var(--gold-500); color:var(--green-950); transform:translateY(-3px);}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--line); padding:20px 0;}
+  .faq-q{display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:700; color:var(--green-950); font-size:1.02rem;}
+  body.dark .faq-q{color:#eef3ee;}
+  .faq-q .plus{transition:transform .3s ease; font-size:1.3rem; color:var(--gold-500);}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .faq-a p{padding-top:14px; color:var(--ink-600); font-size:0.92rem; line-height:1.6; margin:0;}
 
   /* footer */
   .footer{background:var(--green-950); color:#cfe3d5; padding:80px 5% 30px; position:relative; overflow:hidden;}
@@ -310,6 +468,11 @@
   #back-top.show{opacity:1; transform:translateY(0);}
 
 
+  /* announcement ticker */
+  .ticker-wrap{background:var(--green-950); color:var(--gold-300); font-size:0.82rem; padding:8px 0; overflow:hidden; white-space:nowrap;}
+  .ticker{display:inline-block; padding-left:100%; animation:ticker 26s linear infinite;}
+  @keyframes ticker{from{transform:translateX(0);} to{transform:translateX(-100%);}}
+
   /* search */
   #search-panel{position:fixed; inset:0; background:rgba(7,39,26,0.92); z-index:1300; display:flex; align-items:flex-start; justify-content:center; padding-top:12vh; opacity:0; visibility:hidden; transition:all .3s ease;}
   #search-panel.open{opacity:1; visibility:visible;}
@@ -322,6 +485,10 @@
 
   [data-aos]{transition-timing-function:cubic-bezier(.2,.8,.2,1) !important;}
 
+  .fadein{animation:fadeInUp .8s ease forwards;}
+  @keyframes fadeInUp{from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:translateY(0);}}
+
+
   .nav-links a.active-link{color:var(--green-800);}
   .nav-links a.active-link::after{transform:scaleX(1);}
   body.dark .nav-links a.active-link{color:#fff;}
@@ -330,6 +497,13 @@
 </style>
 </head>
 <body>
+<script>
+(function(){
+  if(localStorage.getItem('dlsjbc-theme') === 'dark'){
+    document.body.classList.add('dark');
+  }
+})();
+</script>
 <div id="scroll-progress"></div>
 <div class="cursor-dot" id="cursor-dot"></div>
 
@@ -343,8 +517,8 @@
 </div>
 <div class="nav-links">
 <a href="home.html">Home</a>
-<a href="admission.html">Admission</a>
-<a class="active-link" href="about.html">About</a>
+<a class="active-link" href="admission.html">Admission</a>
+<a href="about.html">About</a>
 <a href="contact.html">Contact</a>
 <a href="articles.html">Articles</a>
 <a href="news.html">News</a>
@@ -361,8 +535,8 @@
 <div id="mobile-menu">
 <button class="menu-close" id="menu-close">✕</button>
 <a href="home.html">Home</a>
-<a href="admission.html">Admission</a>
-<a class="active-link" href="about.html">About</a>
+<a class="active-link" href="admission.html">Admission</a>
+<a href="about.html">About</a>
 <a href="contact.html">Contact</a>
 <a href="articles.html">Articles</a>
 <a href="news.html">News</a>
@@ -374,67 +548,63 @@
 </div>
 
 
-<section class="hero" style="min-height:56vh; background-image:linear-gradient(180deg, rgba(7,39,26,0.75) 0%, rgba(11,61,36,0.75) 55%, rgba(15,82,48,0.8) 100%), url('images/hero-bg.jpg'); background-size:cover; background-position:center;">
-<div class="hero-grid"></div>
-<div class="hero-inner">
-<span class="eyebrow hero-eyebrow" style="opacity:1;">Basic Education</span>
-<h1 style="color:#fdfcf7; font-size:clamp(2.2rem,5vw,3.6rem); opacity:1;">Basic Education (K–10)</h1>
-<p class="hero-sub" style="opacity:1;">A strong foundation from Kindergarten through Grade 10, forming young Lasallians in faith, character, and academic excellence.</p>
-<div class="hero-btns" style="opacity:1;">
-<a class="btn-primary btn-gold confetti-btn" href="contact.html">Apply Now</a>
-<a class="btn-outline" href="about.html#academics">← Back to Programs</a>
-</div>
-</div>
+<!-- ADMISSION INTRO -->
+<section id="admission">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Join DLSJBC</span>
+      <h2>Admissions Made Simple</h2>
+      <p class="muted" style="margin-top:14px;">Follow these steps to begin your Lasallian journey with us.</p>
+    </div>
+    <div class="about-grid">
+      <div class="card" data-aos="fade-up" data-aos-delay="0">
+        <span class="num">Step 1</span>
+        <h3>Inquire</h3>
+        <p>Reach out through our Contact page or visit the campus to learn about available programs.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <span class="num">Step 2</span>
+        <h3>Submit Requirements</h3>
+        <p>Complete the Online Admission Portal and submit required documents such as report cards and birth certificate.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <span class="num">Step 3</span>
+        <h3>Take the Entrance Assessment</h3>
+        <p>Applicants take a placement exam and, where applicable, an admissions interview.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="300">
+        <span class="num">Step 4</span>
+        <h3>Enroll &amp; Begin</h3>
+        <p>Once accepted, complete enrollment and gain access to the Student Portal.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:44px;">
+      <a class="btn-primary confetti-btn" style="padding:14px 34px; font-size:0.95rem; display:inline-flex; align-items:center;" href="contact.html">Apply Now</a>
+    </div>
+  </div>
 </section>
 
-<section id="programs-detail">
-<div class="container">
+<section class="section-alt" id="faq">
+<div class="container" style="max-width:780px;">
 <div class="section-head center">
-<span class="eyebrow">Programs Offered</span>
-<h2>Basic Education (K–10)</h2>
-<p class="muted" style="margin-top:14px;">One continuous journey — from a child's first day of school to the threshold of senior high.</p>
+<span class="eyebrow">Good to Know</span>
+<h2>Frequently Asked Questions</h2>
 </div>
-
-<div class="growth-path">
-
-<div class="tier tier-kinder" data-aos="fade-up">
-<div class="tier-dot"></div>
-<span class="tier-eyebrow">Where it begins</span>
-<h3 class="tier-title">Kindergarten</h3>
-<div class="node-row">
-<div class="node">
-<div class="node-circle node-circle-lg">🧸</div>
-<span class="node-label">Kinder</span>
+<div class="faq-item">
+<div class="faq-q"><span>When does enrollment open for the next school year?</span><span class="plus">+</span></div>
+<div class="faq-a"><p>Enrollment for A.Y. 2026–2027 is open now through the Online Admission Portal, with priority slots for early applicants.</p></div>
 </div>
+<div class="faq-item">
+<div class="faq-q"><span>Does DLSJBC offer scholarships?</span><span class="plus">+</span></div>
+<div class="faq-a"><p>Yes — academic, athletic, and need-based scholarships are available. Details are provided during the admissions interview.</p></div>
 </div>
+<div class="faq-item">
+<div class="faq-q"><span>Is there a Student Portal for grades and schedules?</span><span class="plus">+</span></div>
+<div class="faq-a"><p>All enrolled students receive access to the Student Portal for grades, schedules, and announcements.</p></div>
 </div>
-
-<div class="tier tier-elem" data-aos="fade-up">
-<div class="tier-dot"></div>
-<span class="tier-eyebrow">Building the basics</span>
-<h3 class="tier-title">Elementary · Grades 1–6</h3>
-<div class="node-row">
-<div class="node"><div class="node-circle">1</div><span class="node-label">Grade 1</span></div>
-<div class="node"><div class="node-circle">2</div><span class="node-label">Grade 2</span></div>
-<div class="node"><div class="node-circle">3</div><span class="node-label">Grade 3</span></div>
-<div class="node"><div class="node-circle">4</div><span class="node-label">Grade 4</span></div>
-<div class="node"><div class="node-circle">5</div><span class="node-label">Grade 5</span></div>
-<div class="node"><div class="node-circle">6</div><span class="node-label">Grade 6</span></div>
-</div>
-</div>
-
-<div class="tier tier-junior" data-aos="fade-up">
-<div class="tier-dot"></div>
-<span class="tier-eyebrow">Preparing for senior high</span>
-<h3 class="tier-title">Junior High · Grades 7–10</h3>
-<div class="node-row">
-<div class="node"><div class="node-circle">7</div><span class="node-label">Grade 7</span></div>
-<div class="node"><div class="node-circle">8</div><span class="node-label">Grade 8</span></div>
-<div class="node"><div class="node-circle">9</div><span class="node-label">Grade 9</span></div>
-<div class="node"><div class="node-circle">10</div><span class="node-label">Grade 10</span></div>
-</div>
-</div>
-
+<div class="faq-item">
+<div class="faq-q"><span>Can I schedule a campus visit before applying?</span><span class="plus">+</span></div>
+<div class="faq-a"><p>Absolutely. Reach out through the Contact section below and our admissions team will arrange a guided tour.</p></div>
 </div>
 </div>
 </section>
@@ -484,6 +654,7 @@
 </footer>
 
 <button id="back-top">↑</button>
+
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -558,6 +729,103 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('search-close').addEventListener('click', ()=>searchPanel.classList.remove('open'));
 
+
+  // Hero text reveal via GSAP (home page only)
+  const title = document.getElementById('hero-title');
+  if (title) {
+    const words = title.textContent.split(' ');
+    title.innerHTML = words.map(w => `<span>${w}&nbsp;</span>`).join('');
+    gsap.timeline()
+      .to('#hero-crest', {opacity:1, duration:.8, ease:'power2.out'})
+      .to('#hero-eyebrow', {opacity:1, duration:.6}, '-=0.3')
+      .to('#hero-title span', {y:0, opacity:1, stagger:0.06, duration:0.8, ease:'power3.out'}, '-=0.2')
+      .to('#hero-sub', {opacity:1, duration:.7}, '-=0.4')
+      .to('#hero-btns', {opacity:1, duration:.7}, '-=0.4');
+  }
+
+  // Mouse parallax on hero (home page only)
+  const heroEl = document.querySelector('.hero');
+  if (heroEl) {
+    heroEl.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      gsap.to('.hero-grid', {x:x, y:y, duration:0.6, ease:'power2.out'});
+    });
+  }
+
+  // Floating leaves (home page only)
+  const leafContainer = document.getElementById('leaves-container');
+  if (leafContainer) {
+    for(let i=0;i<14;i++){
+      const leaf = document.createElement('div');
+      leaf.className='leaf';
+      const size = 8 + Math.random()*18;
+      leaf.style.width = size+'px';
+      leaf.style.height = size+'px';
+      leaf.style.left = Math.random()*100+'%';
+      leaf.style.top = Math.random()*100+'%';
+      leafContainer.appendChild(leaf);
+      gsap.to(leaf, {
+        y: -80 - Math.random()*120,
+        x: (Math.random()-0.5)*80,
+        rotation: 360,
+        duration: 6 + Math.random()*6,
+        repeat:-1,
+        delay: Math.random()*4,
+        ease:'sine.inOut',
+        yoyo:true
+      });
+    }
+  }
+
+  // Counters (home page only)
+  const counters = document.querySelectorAll('[data-count]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = +el.dataset.count;
+        let cur = 0;
+        const step = Math.max(1, target/80);
+        const tick = () => {
+          cur += step;
+          if(cur >= target){ el.textContent = target.toLocaleString()+'+'; }
+          else { el.textContent = Math.floor(cur).toLocaleString(); requestAnimationFrame(tick); }
+        };
+        tick();
+        counterObserver.unobserve(el);
+      }
+    });
+  }, {threshold:0.5});
+  counters.forEach(c=>counterObserver.observe(c));
+
+  // Testimonials carousel (about page only)
+  const slides = document.querySelectorAll('.test-slide');
+  const dots = document.querySelectorAll('#test-dots button');
+  let ti = 0;
+  function showSlide(i){
+    slides.forEach(s=>s.classList.remove('active'));
+    dots.forEach(d=>d.classList.remove('active'));
+    slides[i].classList.add('active');
+    dots[i].classList.add('active');
+    ti = i;
+  }
+  if (slides.length) {
+    dots.forEach(d=>d.addEventListener('click', ()=>showSlide(+d.dataset.i)));
+    setInterval(()=>showSlide((ti+1)%slides.length), 5000);
+  }
+
+  // FAQ accordion (admission page only)
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight=null;});
+      if(!isOpen){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight+'px'; }
+    });
+  });
+
   // Confetti on any Apply button
   function confettiBurst(x,y){
     const colors = ['#c9a24a','#0f5230','#dab868','#14663c'];
@@ -578,6 +846,18 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.confetti-btn').forEach(btn=>{
     btn.addEventListener('click', (e)=>{ confettiBurst(e.clientX, e.clientY); });
   });
+
+  // Contact form submit feedback (contact page only)
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(){
+      const btn = document.getElementById('send-btn');
+      const original = btn.textContent;
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = 'linear-gradient(135deg,#1a7d4a,#0f5230)';
+      setTimeout(()=>{ btn.textContent = original; this.reset(); }, 2400);
+    });
+  }
 });
 </script>
 </body>
