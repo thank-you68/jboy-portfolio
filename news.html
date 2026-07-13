@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home | DLSJBC</title>
-<meta name="description" content="De La Salle John Bosco College — Excellence in Education, Service, and Faith.">
+<title>News | DLSJBC</title>
+<meta name="description" content="Latest news, updates, and events at DLSJBC.">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +37,12 @@
   body{
     margin:0;
     font-family:'Inter',sans-serif;
-    background:var(--cream-50);
+    background:
+      linear-gradient(180deg, rgba(250,248,242,0.94), rgba(250,248,242,0.94)),
+      url('home.png');
+    background-attachment:fixed;
+    background-size:cover;
+    background-position:center;
     color:var(--ink-900);
     overflow-x:hidden;
     transition:background .4s ease, color .4s ease;
@@ -60,7 +65,12 @@
 
   /* Dark mode */
   body.dark{
-    background:#081712;
+    background:
+      linear-gradient(180deg, rgba(8,23,18,0.94), rgba(8,23,18,0.94)),
+      url('home.png');
+    background-attachment:fixed;
+    background-size:cover;
+    background-position:center;
     color:#eef3ee;
   }
   body.dark .surface{background:#0f2419; border-color:#1d3a2a;}
@@ -70,6 +80,35 @@
   body.dark .footer{background:#050f0a;}
   body.dark .muted{color:#a9bdae;}
   body.dark .line{border-color:#1d3a2a !important;}
+
+    /* Custom cursor - glow only, no ring */
+  @media (hover:hover) and (pointer:fine){
+    body{cursor:none;}
+    a, button, .magnetic, input, textarea, select, .card, .faq-q{cursor:none;}
+  }
+  .cursor-dot{
+    position:fixed; top:0; left:0; pointer-events:none; z-index:10000;
+    transform:translate(-50%,-50%); will-change:transform;
+    width:10px; height:10px; border-radius:50%;
+    background:var(--gold-500);
+    box-shadow:0 0 8px 2px rgba(201,162,74,0.9),
+               0 0 18px 6px rgba(201,162,74,0.5),
+               0 0 32px 12px rgba(201,162,74,0.25);
+    transition:opacity .2s ease, background .3s ease, box-shadow .25s ease, width .25s ease, height .25s ease;
+  }
+  .cursor-dot.hovering{
+    width:14px; height:14px;
+    background:var(--gold-400);
+    box-shadow:0 0 12px 3px rgba(201,162,74,1),
+               0 0 26px 10px rgba(201,162,74,0.6),
+               0 0 46px 16px rgba(201,162,74,0.3);
+  }
+  .cursor-dot.clicking{ width:7px; height:7px; }
+  body.dark .cursor-dot{ background:var(--gold-400); }
+  @media (max-width: 900px){
+    .cursor-dot{ display:none; }
+    body, a, button{ cursor:auto !important; }
+  }
 
   /* Scroll progress */
   #scroll-progress{
@@ -97,13 +136,10 @@
   }
   .brand{display:flex; align-items:center; gap:12px;}
   .crest{
-    width:42px;height:42px; position:relative; flex-shrink:0;
+    width:42px;height:42px; position:relative; flex-shrink:0; object-fit:contain;
   }
   .brand-text .name{font-size:1.05rem; font-weight:800; line-height:1;}
-  .brand-text .sub{font-size:0.65rem; letter-spacing:0.1em; color:var(--gold-500); text-transform:uppercase; white-space:nowrap;}
-  @media(max-width:480px){
-    .brand-text .sub{display:none;}
-  }
+  .brand-text .sub{font-size:0.65rem; letter-spacing:0.15em; color:var(--gold-500); text-transform:uppercase;}
 
   .nav-links{display:flex; gap:2px; align-items:center;}
   .nav-links a{
@@ -142,7 +178,11 @@
   .btn-outline:hover{background:rgba(255,255,255,0.12); transform:translateY(-2px);}
 
   /* mobile nav */
-  .burger{display:none;}
+  .burger{display:none; width:40px; height:40px; border-radius:50%; border:1px solid var(--line); align-items:center; justify-content:center; cursor:pointer; background:transparent;}
+  @media(max-width:980px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+  }
   #mobile-menu{
     position:fixed; top:0; right:-100%; width:78%; max-width:320px; height:100%; z-index:1100;
     background:var(--green-950); padding:90px 30px; transition:right .4s ease;
@@ -160,11 +200,7 @@
     overflow:hidden; text-align:center;
     background:
       radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,162,74,0.25), transparent 60%),
-      linear-gradient(180deg, rgba(4,26,17,0.88) 0%, rgba(8,45,29,0.85) 55%, rgba(11,58,38,0.9) 100%),
-      url('home.png');
-    background-size:cover, cover, cover;
-    background-position:center, center, center;
-    background-repeat:no-repeat, no-repeat, no-repeat;
+      linear-gradient(180deg, var(--green-950) 0%, var(--green-900) 55%, var(--green-800) 100%);
   }
   .hero-grid{
     position:absolute; inset:0;
@@ -310,14 +346,17 @@
     transition:transform .35s ease, box-shadow .35s ease;
   }
   .news-card:hover{transform:translateY(-8px); box-shadow:0 20px 44px -16px rgba(11,61,36,0.3); border-color:var(--gold-400);}
-  .news-thumb{height:180px; background:linear-gradient(135deg,var(--green-700),var(--green-950)); position:relative;}
+  .news-thumb{height:240px; background:linear-gradient(135deg,var(--green-700),var(--green-950)); position:relative; overflow:hidden;}
+  .news-thumb a{display:block; width:100%; height:100%; cursor:pointer;}
+  .news-thumb img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;}
+  .news-thumb:hover img{transform:scale(1.12);}
   .news-tag{position:absolute; top:14px; left:14px; background:var(--gold-500); color:var(--green-950); font-size:0.7rem; font-weight:700; padding:5px 12px; border-radius:999px; text-transform:uppercase; letter-spacing:0.05em;}
   .news-body{padding:24px;}
   .news-date{font-size:0.78rem; color:var(--gold-500); font-weight:700; letter-spacing:0.05em;}
   .news-body h3{margin:10px 0 10px; font-size:1.08rem; color:var(--green-950); line-height:1.35;}
   body.dark .news-body h3{color:#eef3ee;}
   .news-body p{color:var(--ink-600); font-size:0.88rem; line-height:1.55; margin:0 0 16px;}
-  .news-read{font-size:0.85rem; font-weight:700; color:var(--green-800); display:inline-flex; align-items:center; gap:6px;}
+  .news-read{font-size:0.85rem; font-weight:700; color:var(--green-800); display:inline-flex; align-items:center; gap:6px; cursor:pointer;}
   body.dark .news-read{color:var(--gold-400);}
 
   /* timeline */
@@ -423,14 +462,14 @@
   .faq-a p{padding-top:14px; color:var(--ink-600); font-size:0.92rem; line-height:1.6; margin:0;}
 
   /* footer */
-  .footer{background:var(--green-950); color:#cfe3d5; padding:40px 5% 18px; position:relative; overflow:hidden; font-size:0.85rem;}
-  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:24px; position:relative; z-index:2;}
+  .footer{background:var(--green-950); color:#cfe3d5; padding:80px 5% 30px; position:relative; overflow:hidden;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; position:relative; z-index:2;}
   @media(max-width:860px){.footer-grid{grid-template-columns:repeat(2,1fr);}}
-  .footer h5{color:#fff; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;}
-  .footer ul{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:7px;}
-  .footer a{font-size:0.8rem; color:#b7cabd; transition:color .25s ease;}
+  .footer h5{color:#fff; font-size:0.9rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:18px;}
+  .footer ul{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px;}
+  .footer a{font-size:0.9rem; color:#b7cabd; transition:color .25s ease;}
   .footer a:hover{color:var(--gold-400);}
-  .footer-bottom{border-top:1px solid rgba(255,255,255,0.1); margin-top:24px; padding-top:14px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:0.75rem; color:#94ac9b; position:relative; z-index:2;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.1); margin-top:60px; padding-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:0.82rem; color:#94ac9b; position:relative; z-index:2;}
   .wave{position:absolute; bottom:-1px; left:0; width:100%; opacity:0.06;}
 
   /* back to top */
@@ -440,6 +479,7 @@
     box-shadow:0 10px 30px -8px rgba(0,0,0,0.4); opacity:0; transform:translateY(20px); transition:all .35s ease;
   }
   #back-top.show{opacity:1; transform:translateY(0);}
+
 
   /* announcement ticker */
   .ticker-wrap{background:var(--green-950); color:var(--gold-300); font-size:0.82rem; padding:8px 0; overflow:hidden; white-space:nowrap;}
@@ -467,6 +507,25 @@
   body.dark .nav-links a.active-link{color:#fff;}
   #mobile-menu a.active-link{color:var(--gold-400);}
 
+
+  /* Loader */
+  #loader{
+    position:fixed; inset:0; background:var(--green-950); z-index:10000;
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:16px;
+    transition:opacity .6s ease, visibility .6s ease;
+  }
+  #loader.hide{opacity:0; visibility:hidden;}
+  .leaf-spin{
+    width:52px;height:52px;
+    border-radius:50% 0;
+    background:linear-gradient(135deg,var(--gold-400),var(--green-600));
+    animation:leafspin 1.4s ease-in-out infinite;
+  }
+  @keyframes leafspin{
+    0%,100%{transform:rotate(0deg) scale(1);}
+    50%{transform:rotate(200deg) scale(1.15);}
+  }
+  #loader p{color:var(--cream-100); font-family:'Poppins',sans-serif; letter-spacing:0.2em; font-size:0.75rem; text-transform:uppercase;}
 </style>
 </head>
 <body>
@@ -478,6 +537,12 @@
 })();
 </script>
 <div id="scroll-progress"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
+<div id="loader">
+<div class="leaf-spin"></div>
+<p>De La Salle John Bosco College</p>
+</div>
+
 
 <nav class="navbar" id="navbar">
 <div class="brand">
@@ -488,17 +553,17 @@
 </div>
 </div>
 <div class="nav-links">
-<a class="active-link" href="home.html">Home</a>
+<a href="home.html">Home</a>
 <a href="admission.html">Admission</a>
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
 <a href="articles.html">Articles</a>
-<a href="news.html">News</a>
+<a class="active-link" href="news.html">News</a>
 </div>
 <div class="nav-actions">
 <button class="icon-btn" id="search-open" title="Search">🔍</button>
 <button class="icon-btn" id="dark-toggle" title="Toggle dark mode">🌙</button>
-<a class="btn-primary confetti-btn" id="apply-btn" href="contact.html" style="display:inline-flex; align-items:center;">Apply Now</a>
+<a class="apply-glow btn-primary confetti-btn" id="apply-btn" href="contact.html" style="display:inline-flex; align-items:center;">Apply Now</a>
 <button class="burger" id="burger">☰</button>
 </div>
 </nav>
@@ -506,12 +571,12 @@
 <div id="menu-overlay"></div>
 <div id="mobile-menu">
 <button class="menu-close" id="menu-close">✕</button>
-<a class="active-link" href="home.html">Home</a>
+<a href="home.html">Home</a>
 <a href="admission.html">Admission</a>
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
 <a href="articles.html">Articles</a>
-<a href="news.html">News</a>
+<a class="active-link" href="news.html">News</a>
 </div>
 
 <div id="search-panel">
@@ -519,29 +584,74 @@
 <input autofocus="" placeholder="Search programs, events, announcements…" type="text"/>
 </div>
 
-<div class="ticker-wrap">
-<span class="ticker">📣 Enrollment for A.Y. 2026–2027 is now open — Apply online today   •   🎓 Congratulations to our Latin Honors graduates   •   🏆 DLSJBC wins Regional Robotics Cup   •   📅 Foundation Week begins next Monday</span>
-</div>
-<header class="hero" id="home">
-<div class="hero-grid"></div>
-<div id="leaves-container"></div>
-<div class="hero-inner">
-<img alt="De La Salle John Bosco College Logo" class="hero-crest" id="hero-crest" src="logo.png"/>
-<p class="hero-eyebrow" id="hero-eyebrow">Lasallian since foundation — faith, service, community</p>
-<h1 id="hero-title">Welcome to De La Salle John Bosco College</h1>
-<p class="hero-sub" id="hero-sub">Excellence in Education, Service, and Faith. Forming young minds and hearts for a life of purpose.</p>
-<div class="hero-btns" id="hero-btns">
-<a class="btn-gold confetti-btn" id="apply-confetti" style="border:none; padding:11px 26px; border-radius:999px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center;" href="contact.html">Apply Now</a>
-</div>
-</div>
-</header>
-<section id="stats">
+<section id="news">
 <div class="container">
-<div class="stats-wrap">
-<div class="stat"><h3 data-count="4200">0</h3><p>Students</p></div>
-<div class="stat"><h3 data-count="180">0</h3><p>Faculty</p></div>
-<div class="stat"><h3 data-count="24">0</h3><p>Programs</p></div>
-<div class="stat"><h3 data-count="35">0</h3><p>Years of Excellence</p></div>
+<div class="section-head">
+<span class="eyebrow">Newsroom</span>
+<h2>Latest News &amp; Updates</h2>
+</div>
+<div class="news-grid">
+<div class="news-card" data-aos="fade-up">
+<div class="news-thumb"><a href="Hiring.html"><img alt="Provsion of Medical Kits" src="hiring.jpg"/></a><span class="news-tag">Hiring</span></div>
+<div class="news-body">
+<span class="news-date">July 1, 2026</span>
+<p>𝐍𝐎𝐓𝐈𝐂𝐄 𝐎𝐅 𝐇𝐈𝐑𝐈𝐍𝐆</p>
+<p>Interested applicants may submit their Comprehensive Curriculum Vitae and Application Letter to the Human Resource Office or send them via email at hr@dlsjbc.edu.ph.</p>
+<a class="news-read" href="Hiring.html">Read More →</a>
+</div>
+</div>
+<div class="news-card" data-aos="fade-up" data-aos-delay="100">
+<div class="news-thumb"><a href="Provison-of-Medical-Kits.html"><img alt="𝐀𝐧𝐢𝐦𝐨 𝐟𝐨𝐫 𝐒𝐚𝐟𝐞𝐭𝐲: 𝐄𝐦𝐩𝐨𝐰𝐞𝐫𝐢𝐧𝐠 𝐄𝐯𝐞𝐫𝐲 𝐃𝐞𝐩𝐚𝐫𝐭𝐦𝐞𝐧𝐭 𝐰𝐢𝐭𝐡 𝐂𝐚𝐫𝐞 𝐚𝐧𝐝 𝐏𝐫𝐞𝐩𝐚𝐫𝐞𝐝𝐧𝐞𝐬𝐬" src="medical.jpg"/></a><span class="news-tag">Community</span></div>
+<div class="news-body">
+<span class="news-date">June 24, 2026</span>
+<p>𝐀𝐧𝐢𝐦𝐨 𝐟𝐨𝐫 𝐒𝐚𝐟𝐞𝐭𝐲: 𝐄𝐦𝐩𝐨𝐰𝐞𝐫𝐢𝐧𝐠 𝐄𝐯𝐞𝐫𝐲 𝐃𝐞𝐩𝐚𝐫𝐭𝐦𝐞𝐧𝐭 𝐰𝐢𝐭𝐡 𝐂𝐚𝐫𝐞 𝐚𝐧𝐝 𝐏𝐫𝐞𝐩𝐚𝐫𝐞𝐝𝐧𝐞𝐬𝐬</p>
+<p>Together, let us continue to create a campus where compassion meets preparedness and where every member of our community feels safe, cared for, and empowered.</p>
+<a class="news-read" href="Provison-of-Medical-Kits.html">Read More →</a>
+</div>
+</div>
+<div class="news-card" data-aos="fade-up" data-aos-delay="200">
+<div class="news-thumb"><a href="balik-skwela-balik-pag-asa.html"><img alt="Balik Skwela Balik Pag-asa" src="balik skwela.jpg"/></a><span class="news-tag">Back to school</span></div>
+<div class="news-body">
+<span class="news-date">July 5, 2026</span>
+<p>Balik Skwela Balik Pag-asa</p>
+<p>Join our School Kits Donation Campaign to help learners return to school ready to learn, dream, and succeed.</p>
+<a class="news-read" href="balik-skwela-balik-pag-asa.html">Read More →</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section-alt" id="events">
+<div class="container">
+<div class="section-head center">
+<span class="eyebrow">What's Coming Up</span>
+<h2>Events &amp; Academic Calendar</h2>
+</div>
+<div class="timeline">
+<div class="t-item" data-aos="fade-right">
+<div class="t-dot"></div>
+<span class="t-date">July 21, 2026</span>
+<h4>First Semester Orientation</h4>
+<p>Welcome program for new and returning students across all departments.</p>
+</div>
+<div class="t-item" data-aos="fade-right" data-aos-delay="100">
+<div class="t-dot"></div>
+<span class="t-date">August 15, 2026</span>
+<h4>Foundation Week</h4>
+<p>A week-long celebration of DLSJBC's history, culture, and community spirit.</p>
+</div>
+<div class="t-item" data-aos="fade-right" data-aos-delay="200">
+<div class="t-dot"></div>
+<span class="t-date">September 8, 2026</span>
+<h4>Intramurals Opening Ceremony</h4>
+<p>Departments compete in sports, arts, and academic quiz bowls.</p>
+</div>
+<div class="t-item" data-aos="fade-right" data-aos-delay="300">
+<div class="t-dot"></div>
+<span class="t-date">October 3, 2026</span>
+<h4>Midterm Examinations Begin</h4>
+<p>First round of assessments for all academic programs.</p>
+</div>
 </div>
 </div>
 </section>
@@ -592,13 +702,41 @@
 
 <button id="back-top">↑</button>
 
+
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // Custom cursor: single glowing dot, no ring
+  const cDot = document.getElementById('cursor-dot');
+  if (cDot && matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    window.addEventListener('mousemove', (e)=>{
+      cDot.style.left = e.clientX+'px'; cDot.style.top = e.clientY+'px';
+    });
+    document.addEventListener('mousedown', ()=>cDot.classList.add('clicking'));
+    document.addEventListener('mouseup', ()=>cDot.classList.remove('clicking'));
+    const hoverTargets = 'a, button, .magnetic, input, textarea, select, .card, .faq-q';
+    document.addEventListener('mouseover', (e)=>{
+      if (e.target.closest(hoverTargets)) cDot.classList.add('hovering');
+    });
+    document.addEventListener('mouseout', (e)=>{
+      if (e.target.closest(hoverTargets)) cDot.classList.remove('hovering');
+    });
+    document.addEventListener('mouseleave', ()=>{ cDot.style.opacity='0'; });
+    document.addEventListener('mouseenter', ()=>{ cDot.style.opacity='1'; });
+  }
+
+
   AOS.init({duration:700, once:true, offset:60});
+
+  // Loader
+  window.addEventListener('load', () => {
+    setTimeout(()=>document.getElementById('loader').classList.add('hide'), 500);
+  });
+  setTimeout(()=>document.getElementById('loader').classList.add('hide'), 1800);
+
 
   // Apply saved theme
   if(localStorage.getItem('dlsjbc-theme') === 'dark'){
@@ -644,6 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchPanel.querySelector('input').focus();
   });
   document.getElementById('search-close').addEventListener('click', ()=>searchPanel.classList.remove('open'));
+
 
   // Hero text reveal via GSAP (home page only)
   const title = document.getElementById('hero-title');

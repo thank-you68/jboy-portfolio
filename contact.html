@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home | DLSJBC</title>
-<meta name="description" content="De La Salle John Bosco College — Excellence in Education, Service, and Faith.">
+<title>Contact | DLSJBC</title>
+<meta name="description" content="Get in touch with De La Salle John Bosco College.">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,6 +71,35 @@
   body.dark .muted{color:#a9bdae;}
   body.dark .line{border-color:#1d3a2a !important;}
 
+    /* Custom cursor - glow only, no ring */
+  @media (hover:hover) and (pointer:fine){
+    body{cursor:none;}
+    a, button, .magnetic, input, textarea, select, .card, .faq-q{cursor:none;}
+  }
+  .cursor-dot{
+    position:fixed; top:0; left:0; pointer-events:none; z-index:10000;
+    transform:translate(-50%,-50%); will-change:transform;
+    width:10px; height:10px; border-radius:50%;
+    background:var(--gold-500);
+    box-shadow:0 0 8px 2px rgba(201,162,74,0.9),
+               0 0 18px 6px rgba(201,162,74,0.5),
+               0 0 32px 12px rgba(201,162,74,0.25);
+    transition:opacity .2s ease, background .3s ease, box-shadow .25s ease, width .25s ease, height .25s ease;
+  }
+  .cursor-dot.hovering{
+    width:14px; height:14px;
+    background:var(--gold-400);
+    box-shadow:0 0 12px 3px rgba(201,162,74,1),
+               0 0 26px 10px rgba(201,162,74,0.6),
+               0 0 46px 16px rgba(201,162,74,0.3);
+  }
+  .cursor-dot.clicking{ width:7px; height:7px; }
+  body.dark .cursor-dot{ background:var(--gold-400); }
+  @media (max-width: 900px){
+    .cursor-dot{ display:none; }
+    body, a, button{ cursor:auto !important; }
+  }
+
   /* Scroll progress */
   #scroll-progress{
     position:fixed; top:0; left:0; height:3px; width:0%;
@@ -97,13 +126,10 @@
   }
   .brand{display:flex; align-items:center; gap:12px;}
   .crest{
-    width:42px;height:42px; position:relative; flex-shrink:0;
+    width:42px;height:42px; position:relative; flex-shrink:0; object-fit:contain;
   }
   .brand-text .name{font-size:1.05rem; font-weight:800; line-height:1;}
-  .brand-text .sub{font-size:0.65rem; letter-spacing:0.1em; color:var(--gold-500); text-transform:uppercase; white-space:nowrap;}
-  @media(max-width:480px){
-    .brand-text .sub{display:none;}
-  }
+  .brand-text .sub{font-size:0.65rem; letter-spacing:0.15em; color:var(--gold-500); text-transform:uppercase;}
 
   .nav-links{display:flex; gap:2px; align-items:center;}
   .nav-links a{
@@ -142,7 +168,11 @@
   .btn-outline:hover{background:rgba(255,255,255,0.12); transform:translateY(-2px);}
 
   /* mobile nav */
-  .burger{display:none;}
+  .burger{display:none; width:40px; height:40px; border-radius:50%; border:1px solid var(--line); align-items:center; justify-content:center; cursor:pointer; background:transparent;}
+  @media(max-width:980px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+  }
   #mobile-menu{
     position:fixed; top:0; right:-100%; width:78%; max-width:320px; height:100%; z-index:1100;
     background:var(--green-950); padding:90px 30px; transition:right .4s ease;
@@ -160,11 +190,7 @@
     overflow:hidden; text-align:center;
     background:
       radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,162,74,0.25), transparent 60%),
-      linear-gradient(180deg, rgba(4,26,17,0.88) 0%, rgba(8,45,29,0.85) 55%, rgba(11,58,38,0.9) 100%),
-      url('home.png');
-    background-size:cover, cover, cover;
-    background-position:center, center, center;
-    background-repeat:no-repeat, no-repeat, no-repeat;
+      linear-gradient(180deg, var(--green-950) 0%, var(--green-900) 55%, var(--green-800) 100%);
   }
   .hero-grid{
     position:absolute; inset:0;
@@ -399,8 +425,29 @@
   .send-btn{
     position:relative; overflow:hidden; width:100%; padding:16px; border-radius:12px; border:none; cursor:pointer;
     background:linear-gradient(135deg,var(--green-700),var(--green-950)); color:#fff; font-weight:700; font-size:0.95rem;
+    transition:box-shadow .3s ease, background .3s ease;
   }
   .send-btn:active{transform:scale(0.98);}
+  .send-btn.glow-yellow{
+    box-shadow:0 0 18px 4px rgba(250,204,21,0.75), 0 0 40px 8px rgba(250,204,21,0.35);
+  }
+  .send-btn.glow-green{
+    box-shadow:0 0 18px 4px rgba(34,197,94,0.75), 0 0 40px 8px rgba(34,197,94,0.35);
+  }
+  .send-btn.glow-red{
+    box-shadow:0 0 18px 4px rgba(239,68,68,0.8), 0 0 40px 8px rgba(239,68,68,0.4);
+    animation:shakeGlow .4s ease;
+  }
+  @keyframes shakeGlow{
+    0%,100%{transform:translateX(0);}
+    20%{transform:translateX(-6px);}
+    40%{transform:translateX(6px);}
+    60%{transform:translateX(-4px);}
+    80%{transform:translateX(4px);}
+  }
+  .field.field-error input, .field.field-error textarea{
+    border-color:#ef4444 !important; box-shadow:0 0 0 3px rgba(239,68,68,0.15);
+  }
   .contact-info-card{
     background:linear-gradient(160deg, var(--green-950), var(--green-800)); border-radius:24px; padding:36px; color:#fff;
     height:100%;
@@ -423,15 +470,25 @@
   .faq-a p{padding-top:14px; color:var(--ink-600); font-size:0.92rem; line-height:1.6; margin:0;}
 
   /* footer */
-  .footer{background:var(--green-950); color:#cfe3d5; padding:40px 5% 18px; position:relative; overflow:hidden; font-size:0.85rem;}
-  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:24px; position:relative; z-index:2;}
-  @media(max-width:860px){.footer-grid{grid-template-columns:repeat(2,1fr);}}
-  .footer h5{color:#fff; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px;}
-  .footer ul{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:7px;}
-  .footer a{font-size:0.8rem; color:#b7cabd; transition:color .25s ease;}
-  .footer a:hover{color:var(--gold-400);}
-  .footer-bottom{border-top:1px solid rgba(255,255,255,0.1); margin-top:24px; padding-top:14px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:0.75rem; color:#94ac9b; position:relative; z-index:2;}
-  .wave{position:absolute; bottom:-1px; left:0; width:100%; opacity:0.06;}
+  .footer{background:var(--green-950); color:#cfe3d5; padding:18px 5% 10px; position:relative; overflow:hidden;}
+  .footer::before{content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold-400), transparent);}
+  .footer::after{content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:320px; height:120px; background:radial-gradient(ellipse, rgba(201,162,74,0.18), transparent 70%); pointer-events:none;}
+  .footer-row{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; position:relative; z-index:2;}
+  .footer-brand{display:flex; align-items:center; gap:9px;}
+  .footer-brand .crest-badge{width:32px; height:32px; border-radius:50%; border:1px solid rgba(201,162,74,0.5); padding:4px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.03); flex-shrink:0;}
+  .footer-brand .crest-badge img{width:100%; height:100%; object-fit:contain;}
+  .footer-brand .fname{font-family:'Poppins',sans-serif; font-weight:700; font-size:0.8rem; color:#fff; letter-spacing:0.02em; line-height:1.2;}
+  .footer-brand .fsub{font-size:0.62rem; color:#8fa896; line-height:1.2;}
+  .footer-nav{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; font-size:0.72rem;}
+  .footer-nav a{color:#b7cabd; transition:color .25s ease;}
+  .footer-nav a:hover{color:var(--gold-400);}
+  .footer-nav .sep{color:rgba(201,162,74,0.45); font-size:0.6rem;}
+  .footer-social{display:flex; gap:7px;}
+  .footer-social a{width:26px; height:26px; border-radius:50%; border:1px solid rgba(201,162,74,0.45); display:flex; align-items:center; justify-content:center; font-size:0.6rem; color:var(--gold-400); transition:all .25s ease;}
+  .footer-social a:hover{background:var(--gold-400); color:var(--green-950); border-color:var(--gold-400);}
+  .footer-bottom{margin-top:10px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; font-size:0.64rem; color:#7f9986; position:relative; z-index:2;}
+  .footer-bottom .motto{font-style:italic; color:#8fa896;}
+  @media(max-width:700px){.footer-row{justify-content:center; text-align:center;} .footer-bottom{justify-content:center; text-align:center;}}
 
   /* back to top */
   #back-top{
@@ -440,6 +497,7 @@
     box-shadow:0 10px 30px -8px rgba(0,0,0,0.4); opacity:0; transform:translateY(20px); transition:all .35s ease;
   }
   #back-top.show{opacity:1; transform:translateY(0);}
+
 
   /* announcement ticker */
   .ticker-wrap{background:var(--green-950); color:var(--gold-300); font-size:0.82rem; padding:8px 0; overflow:hidden; white-space:nowrap;}
@@ -478,6 +536,7 @@
 })();
 </script>
 <div id="scroll-progress"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
 
 <nav class="navbar" id="navbar">
 <div class="brand">
@@ -488,17 +547,17 @@
 </div>
 </div>
 <div class="nav-links">
-<a class="active-link" href="home.html">Home</a>
+<a href="home.html">Home</a>
 <a href="admission.html">Admission</a>
 <a href="about.html">About</a>
-<a href="contact.html">Contact</a>
+<a class="active-link" href="contact.html">Contact</a>
 <a href="articles.html">Articles</a>
 <a href="news.html">News</a>
 </div>
 <div class="nav-actions">
 <button class="icon-btn" id="search-open" title="Search">🔍</button>
 <button class="icon-btn" id="dark-toggle" title="Toggle dark mode">🌙</button>
-<a class="btn-primary confetti-btn" id="apply-btn" href="contact.html" style="display:inline-flex; align-items:center;">Apply Now</a>
+<a class="apply-glow btn-primary confetti-btn" id="apply-btn" href="contact.html" style="display:inline-flex; align-items:center;">Apply Now</a>
 <button class="burger" id="burger">☰</button>
 </div>
 </nav>
@@ -506,10 +565,10 @@
 <div id="menu-overlay"></div>
 <div id="mobile-menu">
 <button class="menu-close" id="menu-close">✕</button>
-<a class="active-link" href="home.html">Home</a>
+<a href="home.html">Home</a>
 <a href="admission.html">Admission</a>
 <a href="about.html">About</a>
-<a href="contact.html">Contact</a>
+<a class="active-link" href="contact.html">Contact</a>
 <a href="articles.html">Articles</a>
 <a href="news.html">News</a>
 </div>
@@ -519,78 +578,119 @@
 <input autofocus="" placeholder="Search programs, events, announcements…" type="text"/>
 </div>
 
-<div class="ticker-wrap">
-<span class="ticker">📣 Enrollment for A.Y. 2026–2027 is now open — Apply online today   •   🎓 Congratulations to our Latin Honors graduates   •   🏆 DLSJBC wins Regional Robotics Cup   •   📅 Foundation Week begins next Monday</span>
-</div>
-<header class="hero" id="home">
-<div class="hero-grid"></div>
-<div id="leaves-container"></div>
-<div class="hero-inner">
-<img alt="De La Salle John Bosco College Logo" class="hero-crest" id="hero-crest" src="logo.png"/>
-<p class="hero-eyebrow" id="hero-eyebrow">Lasallian since foundation — faith, service, community</p>
-<h1 id="hero-title">Welcome to De La Salle John Bosco College</h1>
-<p class="hero-sub" id="hero-sub">Excellence in Education, Service, and Faith. Forming young minds and hearts for a life of purpose.</p>
-<div class="hero-btns" id="hero-btns">
-<a class="btn-gold confetti-btn" id="apply-confetti" style="border:none; padding:11px 26px; border-radius:999px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center;" href="contact.html">Apply Now</a>
-</div>
-</div>
-</header>
-<section id="stats">
+<section id="contact">
 <div class="container">
-<div class="stats-wrap">
-<div class="stat"><h3 data-count="4200">0</h3><p>Students</p></div>
-<div class="stat"><h3 data-count="180">0</h3><p>Faculty</p></div>
-<div class="stat"><h3 data-count="24">0</h3><p>Programs</p></div>
-<div class="stat"><h3 data-count="35">0</h3><p>Years of Excellence</p></div>
+<div class="section-head center">
+<span class="eyebrow">Reach Out</span>
+<h2>Get in Touch</h2>
+</div>
+<div class="contact-grid">
+<form id="contact-form" onsubmit="return false;">
+<div class="field">
+<input id="cf-fullname" placeholder=" " required="" type="text"/>
+<label>Full Name</label>
+</div>
+<div class="field">
+<input id="cf-email" placeholder=" " required="" type="email"/>
+<label>Email Address</label>
+</div>
+<div class="field">
+<input id="cf-subject" placeholder=" " required="" type="text"/>
+<label>Subject</label>
+</div>
+<div class="field">
+<textarea id="cf-message" placeholder=" " rows="5"></textarea>
+<label>Message (optional)</label>
+</div>
+<button class="send-btn" id="send-btn" type="submit">Send Message</button>
+</form>
+<div class="contact-info-card">
+<div class="info-row">
+<div class="ic">📍</div>
+<div><div class="t">Address</div><div class="v">De la Salle Dr, City Of Bislig, Surigao del Sur</div></div>
+</div>
+<div class="info-row">
+<div class="ic">📞</div>
+<div><div class="t">Phone</div><div class="v">(086) 853 3415</div></div>
+</div>
+<div class="info-row">
+<div class="ic">✉️</div>
+<div><div class="t">Email</div><div class="v">info@dlsjbc.edu.ph</div></div>
+</div>
+<div class="info-row">
+<div class="ic">🕐</div>
+<div><div class="t">Office Hours</div><div class="v">Mon–Fri, 8:00 AM – 5:00 PM</div></div>
+<div><div class="t">Office Hours</div><div class="v">Sat, 8:00 AM - 12:00 PM</div></div>
+</div>
+<div class="social-row">
+<a href="#">FB</a>
+<a href="#">IG</a>
+<a href="#">YT</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section-alt">
+<div class="container">
+<div class="section-head center">
+<span class="eyebrow">Visit Us</span>
+<h2>Find Our Campus</h2>
+</div>
+<div class="tour-wrap">
+<div data-aos="fade-right">
+<h3 style="color:var(--green-950); font-size:1.3rem; margin-bottom:14px;">De La Salle John Bosco College</h3>
+<p class="muted" style="line-height:1.7; margin-bottom:22px;">De La Salle John Bosco College Gym, De la Salle Dr, City of Bislig, Surigao del Sur.<br>Plus Code: 59J3+3CX</p>
+<div class="info-row" style="align-items:flex-start;">
+<div class="ic" style="background:var(--cream-100);">📍</div>
+<div>
+<div class="t" style="color:var(--gold-500);">Address</div>
+<div class="v" style="color:var(--ink-900);">De la Salle Dr, City of Bislig, Surigao del Sur</div>
+</div>
+</div>
+<a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=59J3%2B3CX+De+La+Salle+John+Bosco+College+Gym%2C+De+la+Salle+Dr%2C+City+of+Bislig%2C+Surigao+del+Sur" style="display:inline-block; margin-top:10px;" target="_blank">Get Directions</a>
+</div>
+<div class="map-frame" data-aos="fade-left">
+<iframe allowfullscreen="" loading="lazy" src="https://www.google.com/maps?q=59J3%2B3CX+De+La+Salle+John+Bosco+College+Gym%2C+De+la+Salle+Dr%2C+City+of+Bislig%2C+Surigao+del+Sur&output=embed"></iframe>
+</div>
 </div>
 </div>
 </section>
 
 <footer class="footer" id="admissions">
-<svg class="wave" preserveaspectratio="none" viewbox="0 0 1200 120"><path d="M0,40 C300,100 900,0 1200,60 L1200,120 L0,120 Z" fill="#c9a24a"></path></svg>
-<div class="footer-grid">
+<div class="footer-row">
+<div class="footer-brand">
+<div class="crest-badge"><img alt="De La Salle John Bosco College Logo" src="logo.png"/></div>
 <div>
-<div class="brand" style="margin-bottom:16px;">
-<img alt="De La Salle John Bosco College Logo" class="crest" src="logo.png"/>
-<div class="brand-text"><div class="name" style="color:#fff;">DLSJBC</div><div class="sub">De La Salle John Bosco College</div></div>
+<div class="fname">DLSJBC</div>
+<div class="fsub">De La Salle John Bosco College</div>
 </div>
-<p style="font-size:0.88rem; line-height:1.6; max-width:280px; color:#a9c1af;">Forming Lasallian leaders in faith, service, and excellence since our founding.</p>
 </div>
-<div>
-<h5>Quick Links</h5>
-<ul>
-<li><a href="about.html#about">About Us</a></li>
-<li><a href="about.html#academics">Academics</a></li>
-<li><a href="news.html#news">News</a></li>
-<li><a href="news.html#events">Events</a></li>
-</ul>
-</div>
-<div>
-<h5>Admissions</h5>
-<ul>
-<li><a href="#">Online Admission Portal</a></li>
-<li><a href="#">Downloadable Forms</a></li>
-<li><a href="#">Scholarships</a></li>
-<li><a href="#">Student Portal</a></li>
-</ul>
-</div>
-<div>
-<h5>Connect</h5>
-<ul>
-<li><a href="#">Facebook</a></li>
-<li><a href="#">Instagram</a></li>
-<li><a href="#">YouTube</a></li>
-<li><a href="#">Privacy Policy</a></li>
-</ul>
+<nav class="footer-nav">
+<a href="about.html#about">About</a><span class="sep">✦</span>
+<a href="about.html#academics">Academics</a><span class="sep">✦</span>
+<a href="news.html#news">News</a><span class="sep">✦</span>
+<a href="news.html#events">Events</a><span class="sep">✦</span>
+<a href="#">Admissions</a><span class="sep">✦</span>
+<a href="#">Scholarships</a><span class="sep">✦</span>
+<a href="#">Student Portal</a><span class="sep">✦</span>
+<a href="#">Privacy Policy</a>
+</nav>
+<div class="footer-social">
+<a aria-label="Facebook" href="#">FB</a>
+<a aria-label="Instagram" href="#">IG</a>
+<a aria-label="YouTube" href="#">YT</a>
 </div>
 </div>
 <div class="footer-bottom">
 <span>© 2026 De La Salle John Bosco College. All rights reserved.</span>
-<span>Faith · Service · Communion in Mission</span>
+<span class="motto">Faith · Service · Communion in Mission</span>
 </div>
 </footer>
 
 <button id="back-top">↑</button>
+
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -598,6 +698,26 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // Custom cursor: single glowing dot, no ring
+  const cDot = document.getElementById('cursor-dot');
+  if (cDot && matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    window.addEventListener('mousemove', (e)=>{
+      cDot.style.left = e.clientX+'px'; cDot.style.top = e.clientY+'px';
+    });
+    document.addEventListener('mousedown', ()=>cDot.classList.add('clicking'));
+    document.addEventListener('mouseup', ()=>cDot.classList.remove('clicking'));
+    const hoverTargets = 'a, button, .magnetic, input, textarea, select, .card, .faq-q';
+    document.addEventListener('mouseover', (e)=>{
+      if (e.target.closest(hoverTargets)) cDot.classList.add('hovering');
+    });
+    document.addEventListener('mouseout', (e)=>{
+      if (e.target.closest(hoverTargets)) cDot.classList.remove('hovering');
+    });
+    document.addEventListener('mouseleave', ()=>{ cDot.style.opacity='0'; });
+    document.addEventListener('mouseenter', ()=>{ cDot.style.opacity='1'; });
+  }
+
+
   AOS.init({duration:700, once:true, offset:60});
 
   // Apply saved theme
@@ -644,6 +764,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchPanel.querySelector('input').focus();
   });
   document.getElementById('search-close').addEventListener('click', ()=>searchPanel.classList.remove('open'));
+
 
   // Hero text reveal via GSAP (home page only)
   const title = document.getElementById('hero-title');
@@ -762,15 +883,72 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', (e)=>{ confettiBurst(e.clientX, e.clientY); });
   });
 
-  // Contact form submit feedback (contact page only)
+  // Contact form submit feedback + glow states (contact page only)
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
+    const sendBtn = document.getElementById('send-btn');
+    const fName = document.getElementById('cf-fullname');
+    const fEmail = document.getElementById('cf-email');
+    const fSubject = document.getElementById('cf-subject');
+    const fMessage = document.getElementById('cf-message'); // optional, not required
+
+    function isFormComplete(){
+      return fName.value.trim() !== '' &&
+             fEmail.value.trim() !== '' &&
+             fSubject.value.trim() !== '';
+    }
+    function clearGlow(){
+      sendBtn.classList.remove('glow-yellow','glow-green','glow-red');
+    }
+    function updateGlow(){
+      clearGlow();
+      sendBtn.classList.add(isFormComplete() ? 'glow-green' : 'glow-yellow');
+    }
+    function clearFieldErrors(){
+      [fName, fEmail, fSubject].forEach(el=>el.closest('.field').classList.remove('field-error'));
+    }
+
+    // Yellow glow the moment the cursor/touch reaches the button
+    sendBtn.addEventListener('mouseenter', updateGlow);
+    sendBtn.addEventListener('touchstart', updateGlow, {passive:true});
+    sendBtn.addEventListener('focus', updateGlow);
+
+    // Re-check completeness live as user types
+    [fName, fEmail, fSubject, fMessage].forEach(el=>{
+      el.addEventListener('input', ()=>{
+        if (sendBtn.matches(':hover') || sendBtn.classList.contains('glow-yellow') || sendBtn.classList.contains('glow-green')) {
+          updateGlow();
+        }
+        el.closest('.field').classList.remove('field-error');
+      });
+    });
+
+    sendBtn.addEventListener('mouseleave', ()=>{
+      if (!sendBtn.classList.contains('glow-red')) clearGlow();
+    });
+
     contactForm.addEventListener('submit', function(){
-      const btn = document.getElementById('send-btn');
+      clearGlow();
+      clearFieldErrors();
+      if (!isFormComplete()) {
+        sendBtn.classList.add('glow-red');
+        [fName, fEmail, fSubject].forEach(el=>{
+          if (el.value.trim() === '') el.closest('.field').classList.add('field-error');
+        });
+        setTimeout(()=>{ sendBtn.classList.remove('glow-red'); }, 1200);
+        return;
+      }
+      sendBtn.classList.add('glow-green');
+      const btn = sendBtn;
       const original = btn.textContent;
       btn.textContent = 'Message Sent ✓';
       btn.style.background = 'linear-gradient(135deg,#1a7d4a,#0f5230)';
-      setTimeout(()=>{ btn.textContent = original; this.reset(); }, 2400);
+      setTimeout(()=>{
+        btn.textContent = original;
+        btn.style.background = '';
+        clearGlow();
+        this.reset();
+      }, 2400);
     });
   }
 });
